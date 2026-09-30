@@ -805,7 +805,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     position: relative !important;
     z-index: 25 !important;
     background-color: #000000 !important;
-    height: 260vh !important;
+    height: 270vh !important;
     padding: 0 !important;
   }
   .discover-subhead {
@@ -832,19 +832,19 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .discovery-content {
     width: 100% !important;
     height: 100% !important;
-    max-width: 1400px !important;
+    max-width: 1440px !important;
     margin: 0 auto !important;
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
     justify-content: center !important;
     position: relative !important;
-    padding: 40px 20px 30px !important;
+    padding: 25px 20px 20px !important;
   }
   .discover-header-block {
     text-align: center !important;
     position: absolute !important;
-    top: 35px !important;
+    top: 20px !important;
     left: 50% !important;
     transform: translateX(-50%) !important;
     z-index: 30 !important;
@@ -852,14 +852,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     margin-bottom: 0 !important;
   }
   .discover-header-block .body-m.grey {
-    font-size: 16px !important;
+    font-size: 15px !important;
     letter-spacing: 0.08em !important;
     text-transform: uppercase !important;
     color: #64748b !important;
-    margin-bottom: 6px !important;
+    margin-bottom: 4px !important;
   }
   .discover-header-block .heading-h1.white {
-    font-size: clamp(34px, 4.5vw, 54px) !important;
+    font-size: clamp(32px, 4.2vw, 50px) !important;
     font-weight: 900 !important;
     letter-spacing: -0.02em !important;
     color: #ffffff !important;
@@ -870,12 +870,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     justify-content: center !important;
     position: relative !important;
     width: 100% !important;
-    height: 600px !important;
-    margin-top: 40px !important;
+    height: 640px !important;
+    margin-top: 10px !important;
   }
   .discovery-mobile {
     position: absolute !important;
-    width: 300px !important;
+    width: 350px !important;
     height: auto !important;
     display: flex !important;
     flex-direction: column !important;
@@ -895,10 +895,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   }
   .discovery-mobile .image {
     width: 100% !important;
-    height: 440px !important;
+    height: 500px !important;
     object-fit: contain !important;
     filter: drop-shadow(0 25px 50px rgba(0, 0, 0, 0.95)) !important;
-    border-radius: 40px !important;
+    border-radius: 42px !important;
     image-rendering: -webkit-optimize-contrast !important;
     transition: filter 0.35s ease !important;
   }
@@ -907,21 +907,21 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   }
   .down-position-block {
     position: relative !important;
-    margin-top: 18px !important;
+    margin-top: 10px !important;
     text-align: center !important;
     width: 100% !important;
-    max-width: 280px !important;
+    max-width: 320px !important;
     will-change: opacity, transform !important;
   }
   .down-text-block .heading-h4 {
-    font-size: 22px !important;
+    font-size: 21px !important;
     font-weight: 800 !important;
     color: #ffffff !important;
-    margin: 0 0 6px !important;
+    margin: 0 0 3px !important;
   }
   .down-text-block .body-s.grey {
-    font-size: 14px !important;
-    line-height: 1.45 !important;
+    font-size: 13px !important;
+    line-height: 1.35 !important;
     color: #94a3b8 !important;
     margin: 0 !important;
   }
@@ -2820,31 +2820,31 @@ document.addEventListener('DOMContentLoaded', function() {
       // Spread interpolation factor (0 = overlapping deck, 1 = fully fanned out in 3 columns)
       var spread = Math.min(1, p * 1.85);
       
-      // Rise: starts slightly lower and rises up to center as you scroll
-      var riseY = (1 - spread) * 160;
+      // Rise / Elevation: starts at +105px (peeking slightly) and elevates to -40px on fan-out for clean bottom clearance
+      var riseY = (1 - spread) * 105 - (spread * 40);
 
-      // Left Phone: starts tucked -130px behind center (overlapping deck like reference image), fans out to -350px
-      var leftInitialX = -130;
-      var leftFinalX = -Math.min(350, window.innerWidth * 0.27);
+      // Left Phone: starts tucked -135px behind center (overlapping deck like reference image), fans out to -380px
+      var leftInitialX = -135;
+      var leftFinalX = -Math.min(380, window.innerWidth * 0.285);
       var leftX = leftInitialX + (leftFinalX - leftInitialX) * spread;
       var leftRot = -2.5 + (-4.0 * spread); // from -2.5deg to -6.5deg
-      var leftScale = 0.94 + (0.04 * spread);
+      var leftScale = 0.95 + (0.05 * spread);
 
-      // Right Phone: starts tucked +130px behind center (overlapping deck like reference image), fans out to +350px
-      var rightInitialX = 130;
-      var rightFinalX = Math.min(350, window.innerWidth * 0.27);
+      // Right Phone: starts tucked +135px behind center (overlapping deck like reference image), fans out to +380px
+      var rightInitialX = 135;
+      var rightFinalX = Math.min(380, window.innerWidth * 0.285);
       var rightX = rightInitialX + (rightFinalX - rightInitialX) * spread;
       var rightRot = 2.5 + (4.0 * spread); // from +2.5deg to +6.5deg
-      var rightScale = 0.94 + (0.04 * spread);
+      var rightScale = 0.95 + (0.05 * spread);
 
       // Center Phone: starts at 0, elevates slightly to front
-      var centerY = riseY - (spread * 15);
-      var centerScale = 0.98 + (0.07 * spread);
+      var centerY = riseY - (spread * 16);
+      var centerScale = 1.0 + (0.06 * spread);
 
-      leftPhone.style.transform = 'translate3d(' + leftX.toFixed(2) + 'px, ' + (riseY + 8).toFixed(2) + 'px, 0) rotate(' + leftRot.toFixed(2) + 'deg) scale(' + leftScale.toFixed(3) + ')';
+      leftPhone.style.transform = 'translate3d(' + leftX.toFixed(2) + 'px, ' + (riseY + 6).toFixed(2) + 'px, 0) rotate(' + leftRot.toFixed(2) + 'deg) scale(' + leftScale.toFixed(3) + ')';
       leftPhone.style.opacity = '1';
 
-      rightPhone.style.transform = 'translate3d(' + rightX.toFixed(2) + 'px, ' + (riseY + 8).toFixed(2) + 'px, 0) rotate(' + rightRot.toFixed(2) + 'deg) scale(' + rightScale.toFixed(3) + ')';
+      rightPhone.style.transform = 'translate3d(' + rightX.toFixed(2) + 'px, ' + (riseY + 6).toFixed(2) + 'px, 0) rotate(' + rightRot.toFixed(2) + 'deg) scale(' + rightScale.toFixed(3) + ')';
       rightPhone.style.opacity = '1';
 
       centerPhone.style.transform = 'translate3d(0, ' + centerY.toFixed(2) + 'px, 0) scale(' + centerScale.toFixed(3) + ')';
@@ -2852,8 +2852,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
       // Text descriptions slide up and fade in under each phone as they fan out
       downTexts.forEach(function(dt) {
-        var textOp = Math.max(0, Math.min(1, (spread - 0.25) * 1.5));
-        var textY = (1 - spread) * 26;
+        var textOp = Math.max(0, Math.min(1, (spread - 0.22) * 1.5));
+        var textY = (1 - spread) * 20;
         dt.style.opacity = textOp.toFixed(2);
         dt.style.transform = 'translate3d(0, ' + textY.toFixed(1) + 'px, 0)';
       });
