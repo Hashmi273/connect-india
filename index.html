@@ -211,48 +211,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   display: block !important;
 }
 
-/* Floating Glassmorphic Badges on Full Landscape */
 .omini-floating-badge {
-  position: absolute !important;
-  display: inline-flex !important;
-  align-items: center !important;
-  gap: 10px !important;
-  background: rgba(255, 255, 255, 0.94) !important;
-  backdrop-filter: blur(12px) !important;
-  -webkit-backdrop-filter: blur(12px) !important;
-  padding: 10px 22px !important;
-  border-radius: 9999px !important;
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04) !important;
-  border: 1px solid rgba(255, 255, 255, 0.9) !important;
-  z-index: 30 !important;
-  cursor: default !important;
-  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.35s ease !important;
+  display: none !important;
 }
-
-.omini-floating-badge:hover {
-  transform: translateY(-5px) scale(1.06) !important;
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.14) !important;
-}
-
-.badge-icon-box {
-  font-size: 16px !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-}
-
-.badge-label {
-  font-size: 15px !important;
-  font-weight: 700 !important;
-  color: #0f172a !important;
-}
-
-/* Wide Panoramic Positions */
-.badge-sms { left: 16% !important; top: 22% !important; }
-.badge-rcs { left: 12% !important; top: 52% !important; }
-.badge-wa { right: 15% !important; top: 18% !important; }
-.badge-voice { right: 14% !important; top: 48% !important; }
-.badge-ivr { right: 12% !important; top: 72% !important; }
 
 /* Grand OMINI Panel in Stadium */
 .omini-arena-anchor {
@@ -1504,22 +1465,6 @@ img {
     width: min(88vw, 420px) !important;
     top: 48% !important;
   }
-  .omini-floating-badge {
-    padding: 6px 12px !important;
-    gap: 6px !important;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.08) !important;
-  }
-  .badge-label {
-    font-size: 12px !important;
-  }
-  .badge-icon-box {
-    font-size: 14px !important;
-  }
-  .badge-sms { left: 4% !important; top: 18% !important; }
-  .badge-rcs { left: 3% !important; top: 58% !important; }
-  .badge-wa { right: 4% !important; top: 16% !important; }
-  .badge-voice { right: 3% !important; top: 52% !important; }
-  .badge-ivr { right: 4% !important; top: 76% !important; }
 }
 
 @media (max-width: 576px) {
@@ -1964,30 +1909,6 @@ img {
     <div class="city-scene-wrapper">
       <div class="city-bg-container">
         <img src="images/hero-custom-city.png" loading="eager" alt="OMINI 3D City" class="city-illustration-img"/>
-      </div>
-
-      <!-- Left Floating Badges -->
-      <div class="omini-floating-badge badge-sms">
-        <span class="badge-icon-box blue-bg">💬</span>
-        <span class="badge-label">SMS</span>
-      </div>
-      <div class="omini-floating-badge badge-rcs">
-        <span class="badge-icon-box green-bg">🗨️</span>
-        <span class="badge-label">RCS</span>
-      </div>
-
-      <!-- Right Floating Badges -->
-      <div class="omini-floating-badge badge-wa">
-        <span class="badge-icon-box wa-bg">📱</span>
-        <span class="badge-label">WhatsApp</span>
-      </div>
-      <div class="omini-floating-badge badge-voice">
-        <span class="badge-icon-box purple-bg">📞</span>
-        <span class="badge-label">Voice</span>
-      </div>
-      <div class="omini-floating-badge badge-ivr">
-        <span class="badge-icon-box orange-bg">📊</span>
-        <span class="badge-label">IVR</span>
       </div>
 
       <!-- OMINI Panel resting directly in the Green Stadium Arena -->
