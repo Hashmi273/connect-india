@@ -2817,39 +2817,43 @@ document.addEventListener('DOMContentLoaded', function() {
 
       var p = currentP;
 
-      // Phase 1 (Starting / Image 1): Phones rise up from bottom (peek up) into center
-      // Phase 2 (Fan Out / Image 2): Phones fan out left, center, right with descriptions
+      // Spread interpolation factor (0 = overlapping deck, 1 = fully fanned out in 3 columns)
       var spread = Math.min(1, p * 1.85);
       
-      // Rise: starts +190px down and rises smoothly to 0
-      var riseY = (1 - spread) * 210;
+      // Rise: starts slightly lower and rises up to center as you scroll
+      var riseY = (1 - spread) * 160;
 
-      // Fanning: Left moves to -340px (-6deg), Right to +340px (+6deg), Center rises
-      var spreadX = Math.min(350, window.innerWidth * 0.26);
-      var leftX = -spreadX * spread;
-      var leftRot = -6.5 * spread;
-      var leftScale = 0.92 + (0.06 * spread);
+      // Left Phone: starts tucked -130px behind center (overlapping deck like reference image), fans out to -350px
+      var leftInitialX = -130;
+      var leftFinalX = -Math.min(350, window.innerWidth * 0.27);
+      var leftX = leftInitialX + (leftFinalX - leftInitialX) * spread;
+      var leftRot = -2.5 + (-4.0 * spread); // from -2.5deg to -6.5deg
+      var leftScale = 0.94 + (0.04 * spread);
 
-      var rightX = spreadX * spread;
-      var rightRot = 6.5 * spread;
-      var rightScale = 0.92 + (0.06 * spread);
+      // Right Phone: starts tucked +130px behind center (overlapping deck like reference image), fans out to +350px
+      var rightInitialX = 130;
+      var rightFinalX = Math.min(350, window.innerWidth * 0.27);
+      var rightX = rightInitialX + (rightFinalX - rightInitialX) * spread;
+      var rightRot = 2.5 + (4.0 * spread); // from +2.5deg to +6.5deg
+      var rightScale = 0.94 + (0.04 * spread);
 
+      // Center Phone: starts at 0, elevates slightly to front
       var centerY = riseY - (spread * 15);
-      var centerScale = 0.95 + (0.10 * spread);
+      var centerScale = 0.98 + (0.07 * spread);
 
-      leftPhone.style.transform = 'translate3d(' + leftX.toFixed(2) + 'px, ' + (riseY + 12).toFixed(2) + 'px, 0) rotate(' + leftRot.toFixed(2) + 'deg) scale(' + leftScale.toFixed(3) + ')';
-      leftPhone.style.opacity = Math.min(1, 0.45 + (spread * 0.55)).toFixed(2);
+      leftPhone.style.transform = 'translate3d(' + leftX.toFixed(2) + 'px, ' + (riseY + 8).toFixed(2) + 'px, 0) rotate(' + leftRot.toFixed(2) + 'deg) scale(' + leftScale.toFixed(3) + ')';
+      leftPhone.style.opacity = '1';
 
-      rightPhone.style.transform = 'translate3d(' + rightX.toFixed(2) + 'px, ' + (riseY + 12).toFixed(2) + 'px, 0) rotate(' + rightRot.toFixed(2) + 'deg) scale(' + rightScale.toFixed(3) + ')';
-      rightPhone.style.opacity = Math.min(1, 0.45 + (spread * 0.55)).toFixed(2);
+      rightPhone.style.transform = 'translate3d(' + rightX.toFixed(2) + 'px, ' + (riseY + 8).toFixed(2) + 'px, 0) rotate(' + rightRot.toFixed(2) + 'deg) scale(' + rightScale.toFixed(3) + ')';
+      rightPhone.style.opacity = '1';
 
       centerPhone.style.transform = 'translate3d(0, ' + centerY.toFixed(2) + 'px, 0) scale(' + centerScale.toFixed(3) + ')';
-      centerPhone.style.opacity = Math.min(1, 0.55 + (spread * 0.45)).toFixed(2);
+      centerPhone.style.opacity = '1';
 
-      // Text descriptions slide up and fade in under each phone
+      // Text descriptions slide up and fade in under each phone as they fan out
       downTexts.forEach(function(dt) {
-        var textOp = Math.max(0, Math.min(1, (spread - 0.28) * 1.5));
-        var textY = (1 - spread) * 28;
+        var textOp = Math.max(0, Math.min(1, (spread - 0.25) * 1.5));
+        var textY = (1 - spread) * 26;
         dt.style.opacity = textOp.toFixed(2);
         dt.style.transform = 'translate3d(0, ' + textY.toFixed(1) + 'px, 0)';
       });
@@ -2864,6 +2868,7 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('scroll', calculateProgress, { passive: true });
     window.addEventListener('resize', calculateProgress, { passive: true });
     
+    // Initial run so the overlapping deck is rendered immediately on page load
     calculateProgress();
   }
 
