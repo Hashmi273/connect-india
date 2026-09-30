@@ -1439,7 +1439,8 @@ img {
     flex-direction: column !important;
     align-items: center !important;
     justify-content: flex-start !important;
-    overflow: hidden !important;
+    overflow: visible !important;
+    z-index: 60 !important;
   }
   .hero-inner-container {
     position: relative !important;
@@ -1447,6 +1448,7 @@ img {
     max-width: 100% !important;
     margin: 0 auto !important;
     display: block !important;
+    overflow: visible !important;
   }
   .city-scene-wrapper {
     position: relative !important;
@@ -1455,7 +1457,7 @@ img {
     height: auto !important;
     aspect-ratio: 9 / 16 !important;
     margin: 0 auto !important;
-    overflow: hidden !important;
+    overflow: visible !important;
     border-radius: 0 !important;
     box-shadow: none !important;
   }
@@ -1465,6 +1467,7 @@ img {
     width: 100% !important;
     height: 100% !important;
     z-index: 1 !important;
+    overflow: hidden !important;
     -webkit-mask-image: none !important;
     mask-image: none !important;
   }
@@ -1514,9 +1517,9 @@ img {
   .omini-arena-anchor {
     position: absolute !important;
     left: 50% !important;
-    top: 72% !important;
+    top: 56% !important;
     transform: translate(-50%, -50%) !important;
-    width: min(84vw, 350px) !important;
+    width: min(84vw, 360px) !important;
     z-index: 35 !important;
     pointer-events: none !important;
   }
@@ -1535,8 +1538,8 @@ img {
     aspect-ratio: 9 / 16 !important;
   }
   .omini-arena-anchor {
-    top: 72% !important;
-    width: min(82vw, 320px) !important;
+    top: 56% !important;
+    width: min(84vw, 340px) !important;
   }
 }
 
@@ -2970,18 +2973,19 @@ document.addEventListener('DOMContentLoaded', function() {
       var windowH = window.innerHeight || document.documentElement.clientHeight;
       var dealsRect = dealsSc.getBoundingClientRect();
       var anchorRect = anchor.getBoundingClientRect();
+      var dock = document.getElementById('toolsCenterDock') || document.querySelector('.tools-center-dock');
+      var dockRect = (dock && dock.offsetHeight > 50) ? dock.getBoundingClientRect() : dealsRect;
 
-      // Total travel distance in pixels between the stadium arena anchor and deals center
+      // Total travel distance in pixels between the stadium arena anchor and deals center dock
       var startY = (anchorRect.top + anchorRect.height / 2) + scrollY;
-      var targetCenterY = (dealsRect.top + dealsRect.height / 2) + scrollY;
+      var targetCenterY = (dockRect.top + dockRect.height / 2) + scrollY;
       var totalDistance = targetCenterY - startY;
-      if (totalDistance < 300) totalDistance = 650;
 
       // Webflow scroll timing:
       // Starts as soon as scroll starts (scrollY > 0)
-      // Completes when deals section header/center comes into comfortable viewing position (dealsRect.top <= windowH * 0.3)
+      // Completes when tools center dock comes into comfortable viewing position
       var scrollStart = 0;
-      var scrollEnd = (dealsRect.top + scrollY) - (windowH * 0.28);
+      var scrollEnd = (dockRect.top + scrollY) - (windowH * 0.32);
       if (scrollEnd <= scrollStart) scrollEnd = windowH * 0.8;
 
       var progress = (scrollY - scrollStart) / (scrollEnd - scrollStart);
