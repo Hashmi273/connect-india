@@ -1,0 +1,12 @@
+{
+  "name": "connect-india",
+  "version": "1.0.0",
+  "description": "Connect INDIA — Messaging India Forward | Enterprise Cloud Communications & CPaaS Platform",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "sharp": "^0.33.5"
+  }
+}
