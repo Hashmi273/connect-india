@@ -116,16 +116,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 .hero-sc {
   position: relative !important;
   z-index: 60 !important;
-  background: radial-gradient(ellipse 100% 85% at 50% 35%, #eaf3fb 0%, #f3f8fd 45%, #ffffff 90%) !important;
+  background: #ffffff !important;
   width: 100% !important;
-  min-height: 100vh !important;
   height: 100vh !important;
-  padding: 95px 0 0 !important;
+  min-height: 720px !important;
+  padding: 0 !important;
   margin: 0 !important;
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: center !important;
-  justify-content: flex-start !important;
+  display: block !important;
   overflow: visible !important;
   box-sizing: border-box !important;
 }
@@ -135,39 +132,39 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   max-width: 100% !important;
   height: 100% !important;
   margin: 0 auto !important;
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: center !important;
-  justify-content: flex-start !important;
   position: relative !important;
-  flex: 1 !important;
+  display: block !important;
 }
 
-/* Hero Header */
+/* Hero Header Floating Directly on Top of City Scene */
 .omini-hero-header {
   text-align: center !important;
+  position: absolute !important;
+  top: 92px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
   width: 100% !important;
   max-width: 1200px !important;
   display: flex !important;
   flex-direction: column !important;
   align-items: center !important;
   justify-content: center !important;
-  margin-bottom: 28px !important;
+  margin: 0 !important;
   z-index: 25 !important;
-  flex-shrink: 0 !important;
+  pointer-events: none !important;
 }
 
 .omini-hero-subheader {
-  font-size: 16px !important;
-  font-weight: 600 !important;
-  color: #7b8494 !important;
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  color: #475569 !important;
   letter-spacing: 0.08em !important;
-  text-transform: capitalize !important;
-  margin-bottom: 6px !important;
+  text-transform: uppercase !important;
+  margin-bottom: 4px !important;
 }
 
 .omini-hero-title {
-  font-size: clamp(38px, 5.5vw, 76px) !important;
+  font-size: clamp(38px, 5.2vw, 72px) !important;
   font-weight: 900 !important;
   color: #0b0f19 !important;
   letter-spacing: -0.03em !important;
@@ -181,15 +178,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   color: #22c55e !important;
 }
 
-/* Full Width Panoramic 3D City Landscape Screenfit */
+/* Full Width Panoramic 3D City Landscape (ZERO WHITE PADDING) */
 .city-scene-wrapper {
-  position: relative !important;
+  position: absolute !important;
+  inset: 0 !important;
   width: 100% !important;
-  max-width: 100% !important;
-  flex: 1 !important;
   height: 100% !important;
-  min-height: 480px !important;
-  margin: 20px auto 0 !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
@@ -201,12 +198,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   inset: 0 !important;
   width: 100% !important;
   height: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
   z-index: 5 !important;
-  -webkit-mask-image: radial-gradient(ellipse 95% 85% at 50% 50%, rgba(0,0,0,1) 65%, rgba(0,0,0,0.85) 85%, rgba(0,0,0,0) 100%) !important;
-  mask-image: radial-gradient(ellipse 95% 85% at 50% 50%, rgba(0,0,0,1) 65%, rgba(0,0,0,0.85) 85%, rgba(0,0,0,0) 100%) !important;
+  -webkit-mask-image: none !important;
+  mask-image: none !important;
 }
 
 .city-bg-container picture {
