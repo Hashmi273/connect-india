@@ -576,10 +576,15 @@
 
     /* FAQ Section on Subtle Light Background matching Reviews on Home Page */
     .faq-light-sc {
-      padding: 80px 24px 100px;
-      background: #f8fafc;
-      border-top: 1px solid #e2e8f0;
-      border-bottom: 1px solid #e2e8f0;
+      position: relative !important;
+      z-index: 5 !important;
+      display: block !important;
+      padding: 80px 24px 100px !important;
+      background: #f8fafc !important;
+      border-top: 1px solid #e2e8f0 !important;
+      border-bottom: 1px solid #e2e8f0 !important;
+      clear: both !important;
+      margin: 0 !important;
     }
 
     .faq-inner-wrap {
@@ -649,6 +654,70 @@
     .faq-accordion-card.active .faq-plus-icon {
       transform: rotate(45deg);
       color: #0b0f19;
+    }
+
+    /* Overlap Fix: CTA and Footer Static Document Flow */
+    .cta-sc {
+      position: relative !important;
+      z-index: 4 !important;
+      top: auto !important;
+      bottom: auto !important;
+      left: auto !important;
+      right: auto !important;
+      height: auto !important;
+      min-height: auto !important;
+      max-height: none !important;
+      display: block !important;
+      clear: both !important;
+      margin: 0 !important;
+      background-color: #ffffff !important;
+      padding: 70px 24px !important;
+    }
+
+    .footer-sc {
+      position: relative !important;
+      z-index: 3 !important;
+      top: auto !important;
+      bottom: auto !important;
+      left: auto !important;
+      right: auto !important;
+      height: auto !important;
+      min-height: auto !important;
+      max-height: none !important;
+      display: block !important;
+      clear: both !important;
+      margin: 0 !important;
+      background-color: #ffffff !important;
+    }
+
+    .footer-height-set,
+    .footer-subheight,
+    .footer-sticky {
+      position: relative !important;
+      top: auto !important;
+      bottom: auto !important;
+      left: auto !important;
+      right: auto !important;
+      height: auto !important;
+      min-height: auto !important;
+      max-height: none !important;
+      width: 100% !important;
+      display: block !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+
+    .footer-sticky {
+      padding: 60px 0 30px !important;
+    }
+
+    .footer-s {
+      position: relative !important;
+      width: 100% !important;
+      max-width: 1280px !important;
+      margin: 0 auto !important;
+      padding-left: 24px !important;
+      padding-right: 24px !important;
     }
 
     /* Exact EventBeds Footer Styling */
