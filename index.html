@@ -873,17 +873,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     margin: 0 !important;
   }
   .discovery-content {
-    width: 100% !important;
+    width: 100vw !important;
     height: 100vh !important;
-    max-width: 1440px !important;
+    max-width: 100vw !important;
     margin: 0 auto !important;
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
     justify-content: center !important;
     position: relative !important;
-    padding: 20px !important;
+    padding: 0 !important;
     box-sizing: border-box !important;
+    overflow: hidden !important;
   }
   .discover-header-block {
     text-align: center !important;
@@ -914,8 +915,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     align-items: center !important;
     justify-content: center !important;
     position: relative !important;
-    width: 100%;
+    width: 100% !important;
     height: 100vh !important;
+    margin: 0 !important;
+    padding: 0 !important;
   }
   .discovery-mobile {
     position: absolute !important;
@@ -3210,15 +3213,16 @@ document.addEventListener('DOMContentLoaded', function() {
       var startY = Math.min(50, windowH * 0.06);
       var currentY = (1 - ease) * startY;
 
-      // Horizontal spread distance based on screen width
-      var maxSpreadX = Math.min(440, window.innerWidth * 0.32);
-      var startSpreadX = 75; // tucked behind in EventBeds
+      // Symmetric horizontal spread distance based on screen width
+      var maxSpreadX = Math.min(360, window.innerWidth * 0.27);
+      var startSpreadX = 60; // tucked behind center in EventBeds
       
-      var leftX = - (startSpreadX + (maxSpreadX - startSpreadX) * ease);
-      var rightX = startSpreadX + (maxSpreadX - startSpreadX) * ease;
+      var spreadDist = startSpreadX + (maxSpreadX - startSpreadX) * ease;
+      var leftX = -spreadDist;
+      var rightX = spreadDist;
 
-      // Center phone scale: starts prominent at 1.12, settles to 1.0
-      var centerScale = 1.12 - (0.12 * ease);
+      // Center phone scale: starts prominent at 1.10, settles to 1.0
+      var centerScale = 1.10 - (0.10 * ease);
       // Side phones scale: starts at 0.90, settles to 0.98
       var sideScale = 0.90 + (0.08 * ease);
 
