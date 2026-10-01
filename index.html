@@ -1032,17 +1032,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   }
   .discovery-mobile.center {
     z-index: 20 !important;
-    opacity: 1 !important;
   }
   .discovery-mobile.left {
     z-index: 10 !important;
-    opacity: 0;
-    pointer-events: none;
   }
   .discovery-mobile.right {
     z-index: 10 !important;
-    opacity: 0;
-    pointer-events: none;
   }
   .discovery-mobile .image {
     width: 100% !important;
@@ -3264,14 +3259,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <script id="channels-phones-scroll">
 (function() {
+  var _initialized = false;
+
   function initChannelPhonesScroll() {
     var section = document.querySelector('.discover-sc');
     if (!section) return;
 
-    // =====================================================================
-    // STEP 1: Neutralize Webflow IX2 on this section and all descendants
-    // Remove all data-w-id attributes so Webflow IX2 runtime ignores them
-    // =====================================================================
+    // Neutralize Webflow IX2 on this section
     section.removeAttribute('data-w-id');
     var wfChildren = section.querySelectorAll('[data-w-id]');
     for (var i = 0; i < wfChildren.length; i++) {
@@ -3282,84 +3276,135 @@ document.addEventListener('DOMContentLoaded', function() {
     var leftPhone = section.querySelector('.discovery-mobile.left');
     var centerPhone = section.querySelector('.discovery-mobile.center');
     var rightPhone = section.querySelector('.discovery-mobile.right');
-    var downTexts = section.querySelectorAll('.down-position-block');
+    var leftLabel = leftPhone ? leftPhone.querySelector('.down-position-block') : null;
+    var centerLabel = centerPhone ? centerPhone.querySelector('.down-position-block') : null;
+    var rightLabel = rightPhone ? rightPhone.querySelector('.down-position-block') : null;
 
     if (!leftPhone || !centerPhone || !rightPhone) return;
+    if (_initialized) return;
+    _initialized = true;
 
-    // =====================================================================
-    // STEP 2: Force initial state — center phone visible, sides hidden
-    // =====================================================================
+    // Easing functions
+    function easeInOutCubic(t) {
+      return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+    }
+    function easeOutCubic(t) {
+      return 1 - Math.pow(1 - t, 3);
+    }
+    function clamp(val, min, max) {
+      return Math.max(min, Math.min(max, val));
+    }
+
+    // =========================================================================
+    // EXACT EVENTBEDS "EASY SEARCH" 3-STAGE CHOREOGRAPHY:
+    // 
+    // Stage 1 (p: 0.00 -> 0.18):
+    //   - User scrolls down into Channels section.
+    //   - Only 1 Center Phone (RCS) is visible, centered, large (scale 1.15).
+    //   - Left (SMS) and Right (WhatsApp) cards are completely hidden (opacity 0)
+    //     and tucked behind/off to the sides.
+    // 
+    // Stage 2 (p: 0.15 -> 0.65):
+    //   - As user continues scrolling down:
+    //   - 1st card (SMS) slides smoothly out from the LEFT.
+    //   - 2nd card (WhatsApp) slides smoothly out from the RIGHT.
+    //   - Center card settles down from 1.15 to scale 1.0.
+    //   - All 3 cards form the beautiful trio layout.
+    // 
+    // Stage 3 (p: 0.55 -> 0.82):
+    //   - Channel labels ("SMS", "RCS", "WhatsApp") glide upward and fade in.
+    // 
+    // Stage 4 (p: 0.85 -> 1.00):
+    //   - Smooth upward exit lift into the next section.
+    // =========================================================================
+
     function applyState(p) {
-      var windowW = window.innerWidth || 1200;
-      var maxSpreadX = Math.min(340, windowW * 0.26);
+      var vw = window.innerWidth || 1200;
+      // Target horizontal offset for side cards in px
+      var finalSpread = Math.min(350, Math.max(280, vw * 0.26));
+      // Starting X position: tucked behind center phone or slightly inwards
+      var startX = 0; 
 
-      // --- Fan-Out Progress (0.12 -> 0.62) ---
-      var fanP = Math.max(0, Math.min(1, (p - 0.12) / 0.50));
-      var fanEase = fanP < 0.5 
-        ? 4 * fanP * fanP * fanP 
-        : 1 - Math.pow(-2 * fanP + 2, 3) / 2;
+      // --- Stage 2: Emerge & Fan-Out (p: 0.15 -> 0.60) ---
+      var fanRaw = clamp((p - 0.15) / 0.45, 0, 1);
+      var fanEase = easeInOutCubic(fanRaw);
 
-      var spreadX = maxSpreadX * fanEase;
+      // Left card emerges from behind center and slides LEFT to -finalSpread
+      var currentLeftX = -(finalSpread * fanEase);
+      // Right card emerges from behind center and slides RIGHT to +finalSpread
+      var currentRightX = (finalSpread * fanEase);
 
-      // Center phone scale: starts at 1.18, settles to 1.00
-      var centerScale = 1.18 - (0.18 * fanEase);
+      // Opacity: Left & Right cards fade in cleanly as soon as they start emerging
+      var sideOpacity = clamp((fanRaw - 0.03) * 3.2, 0, 1);
 
-      // Side phones scale: starts at 0.82, settles to 1.00
-      var sideScale = 0.82 + (0.18 * fanEase);
+      // Center card starts at 1.15, settles down to 1.00
+      var centerScale = 1.15 - (0.15 * fanEase);
+      // Side cards start slightly smaller (0.88), expand to 1.00
+      var sideScale = 0.88 + (0.12 * fanEase);
 
-      // Side phones opacity: 0 at start, fades in as they fan out
-      var sideOpacity = Math.max(0, Math.min(1, (fanP - 0.02) * 2.8));
+      // Subtle dynamic 3D angle when spreading
+      var leftRot = -4.0 * (1 - fanEase);
+      var rightRot = 4.0 * (1 - fanEase);
 
-      // 3D card fanning rotation
-      var leftRot = -3.5 * (1 - fanEase);
-      var rightRot = 3.5 * (1 - fanEase);
+      // --- Stage 3: Labels Fade & Slide Up (p: 0.55 -> 0.80) ---
+      var labelRaw = clamp((p - 0.55) / 0.25, 0, 1);
+      var labelEase = easeOutCubic(labelRaw);
+      var labelOpacity = labelEase;
+      var labelY = (1 - labelEase) * 22; // slides up by 22px
 
-      // --- Stage 3: Labels (0.55 -> 0.82) ---
-      var labelP = Math.max(0, Math.min(1, (p - 0.55) / 0.27));
-      var labelEase = labelP < 0.5 
-        ? 2 * labelP * labelP 
-        : -1 + (4 - 2 * labelP) * labelP;
-      var textOp = labelEase;
-      var textY = (1 - labelEase) * 20;
-
-      // --- Stage 4: Exit upward lift (0.84 -> 1.00) ---
-      var exitP = Math.max(0, Math.min(1, (p - 0.84) / 0.16));
-      var exitEase = exitP * exitP;
-      var exitY = -45 * exitEase;
+      // --- Stage 4: Seamless Exit Lift (p: 0.85 -> 1.00) ---
+      var exitRaw = clamp((p - 0.85) / 0.15, 0, 1);
+      var exitEase = exitRaw * exitRaw;
+      var exitY = -50 * exitEase;
       var exitScale = 1.00 - (0.06 * exitEase);
 
-      // Center Phone Transform
-      var finalCenterScale = centerScale * exitScale;
-      centerPhone.style.cssText = 'position:absolute!important;top:52%!important;left:50%!important;z-index:20!important;opacity:1!important;will-change:transform!important;transform:translate3d(-50%,calc(-50% + ' + exitY.toFixed(2) + 'px),0) scale(' + finalCenterScale.toFixed(3) + ')!important;';
+      // Calculate final transforms
+      var finalCenterScale = (centerScale * exitScale).toFixed(4);
+      var finalSideScale = (sideScale * exitScale).toFixed(4);
+      var yOffset = exitY.toFixed(1);
 
-      // Left Phone Transform
-      var finalSideScale = sideScale * exitScale;
-      leftPhone.style.cssText = 'position:absolute!important;top:52%!important;left:50%!important;z-index:10!important;will-change:transform!important;opacity:' + sideOpacity.toFixed(3) + '!important;pointer-events:' + (sideOpacity > 0.5 ? 'auto' : 'none') + '!important;transform:translate3d(calc(-50% - ' + spreadX.toFixed(2) + 'px),calc(-50% + ' + exitY.toFixed(2) + 'px),0) rotate(' + leftRot.toFixed(2) + 'deg) scale(' + finalSideScale.toFixed(3) + ')!important;';
+      // Apply Center Phone (Always in view, dominant)
+      centerPhone.style.setProperty('transform', 'translate3d(-50%, calc(-50% + ' + yOffset + 'px), 0) scale(' + finalCenterScale + ')', 'important');
+      centerPhone.style.setProperty('opacity', '1', 'important');
+      centerPhone.style.setProperty('z-index', '20', 'important');
 
-      // Right Phone Transform
-      rightPhone.style.cssText = 'position:absolute!important;top:52%!important;left:50%!important;z-index:10!important;will-change:transform!important;opacity:' + sideOpacity.toFixed(3) + '!important;pointer-events:' + (sideOpacity > 0.5 ? 'auto' : 'none') + '!important;transform:translate3d(calc(-50% + ' + spreadX.toFixed(2) + 'px),calc(-50% + ' + exitY.toFixed(2) + 'px),0) rotate(' + rightRot.toFixed(2) + 'deg) scale(' + finalSideScale.toFixed(3) + ')!important;';
+      // Apply Left Phone (SMS - Slides out to the left)
+      leftPhone.style.setProperty('transform', 'translate3d(calc(-50% + ' + currentLeftX.toFixed(1) + 'px), calc(-50% + ' + yOffset + 'px), 0) rotate(' + leftRot.toFixed(2) + 'deg) scale(' + finalSideScale + ')', 'important');
+      leftPhone.style.setProperty('opacity', sideOpacity.toFixed(3), 'important');
+      leftPhone.style.setProperty('pointer-events', sideOpacity > 0.6 ? 'auto' : 'none', 'important');
+      leftPhone.style.setProperty('z-index', '10', 'important');
 
-      // Apply transforms to Labels
-      for (var j = 0; j < downTexts.length; j++) {
-        downTexts[j].style.cssText = 'opacity:' + textOp.toFixed(3) + '!important;transform:translate3d(0,' + textY.toFixed(1) + 'px,0)!important;';
+      // Apply Right Phone (WhatsApp - Slides out to the right)
+      rightPhone.style.setProperty('transform', 'translate3d(calc(-50% + ' + currentRightX.toFixed(1) + 'px), calc(-50% + ' + yOffset + 'px), 0) rotate(' + rightRot.toFixed(2) + 'deg) scale(' + finalSideScale + ')', 'important');
+      rightPhone.style.setProperty('opacity', sideOpacity.toFixed(3), 'important');
+      rightPhone.style.setProperty('pointer-events', sideOpacity > 0.6 ? 'auto' : 'none', 'important');
+      rightPhone.style.setProperty('z-index', '10', 'important');
+
+      // Apply Labels (Fade and lift up)
+      var labels = [leftLabel, centerLabel, rightLabel];
+      for (var k = 0; k < labels.length; k++) {
+        if (labels[k]) {
+          labels[k].style.setProperty('opacity', labelOpacity.toFixed(3), 'important');
+          labels[k].style.setProperty('transform', 'translate3d(0, ' + labelY.toFixed(1) + 'px, 0)', 'important');
+        }
       }
 
-      // Header block subtle exit fade
+      // Header subtle exit fade
       if (headerBlock) {
-        var headerOpacity = Math.max(0, 1 - (exitP * 1.5));
-        headerBlock.style.opacity = headerOpacity.toFixed(3);
+        var headerOpacity = clamp(1 - (exitRaw * 1.5), 0, 1);
+        headerBlock.style.setProperty('opacity', headerOpacity.toFixed(3), 'important');
       }
     }
 
-    // Apply initial state (p=0) immediately
+    // Set initial p=0 immediately
     applyState(0);
 
-    // =====================================================================
-    // STEP 3: Scroll-driven animation with smooth lerping
-    // =====================================================================
+    // =========================================================================
+    // SCROLL LISTENER WITH SMOOTH LERP
+    // =========================================================================
     var currentP = 0;
     var targetP = 0;
-    var ticking = false;
+    var isTicking = false;
 
     function getProgress() {
       var rect = section.getBoundingClientRect();
@@ -3367,53 +3412,51 @@ document.addEventListener('DOMContentLoaded', function() {
       var totalScrollable = rect.height - windowH;
       if (totalScrollable <= 0) totalScrollable = 1;
       var scrolled = -rect.top;
-      return Math.max(0, Math.min(1, scrolled / totalScrollable));
+      return clamp(scrolled / totalScrollable, 0, 1);
     }
 
-    function tick() {
+    function loop() {
       if (window.innerWidth < 992) {
-        ticking = false;
+        isTicking = false;
         return;
       }
-
       var diff = targetP - currentP;
-      if (Math.abs(diff) > 0.0005) {
-        currentP += diff * 0.18;
+      if (Math.abs(diff) > 0.0003) {
+        currentP += diff * 0.16;
         applyState(currentP);
-        requestAnimationFrame(tick);
+        requestAnimationFrame(loop);
       } else {
         currentP = targetP;
         applyState(currentP);
-        ticking = false;
+        isTicking = false;
       }
     }
 
     function onScroll() {
       if (window.innerWidth < 992) return;
       targetP = getProgress();
-      if (!ticking) {
-        ticking = true;
-        requestAnimationFrame(tick);
+      if (!isTicking) {
+        isTicking = true;
+        requestAnimationFrame(loop);
       }
     }
 
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', onScroll, { passive: true });
 
-    // Initial calculation
+    // Initial position
     targetP = getProgress();
-    currentP = targetP; // Jump to initial position without lerping
+    currentP = targetP;
     applyState(currentP);
   }
 
-  // Run as early as possible, then re-run after Webflow loads
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initChannelPhonesScroll);
   } else {
     initChannelPhonesScroll();
   }
 
-  // Re-run after a delay to override any Webflow IX2 that initializes later
+  // Fallbacks in case Webflow renders late
   setTimeout(initChannelPhonesScroll, 500);
   setTimeout(initChannelPhonesScroll, 1500);
 })();
