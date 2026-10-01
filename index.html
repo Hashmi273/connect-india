@@ -844,6 +844,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     height: 100% !important;
     position: relative !important;
     background-color: #000000 !important;
+    z-index: 10 !important;
   }
   .discover-height {
     height: 100% !important;
@@ -861,9 +862,19 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     overflow: hidden !important;
     background-color: #000000 !important;
   }
+  .container-full.discover-s {
+    width: 100vw !important;
+    height: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    position: relative !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
   .discovery-content {
     width: 100% !important;
-    height: 100% !important;
+    height: 100vh !important;
     max-width: 1440px !important;
     margin: 0 auto !important;
     display: flex !important;
@@ -871,31 +882,32 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     align-items: center !important;
     justify-content: center !important;
     position: relative !important;
-    padding: 20px 20px 10px !important;
+    padding: 0 20px !important;
     box-sizing: border-box !important;
   }
   .discover-header-block {
     text-align: center !important;
     position: absolute !important;
-    top: 24px !important;
+    top: 40px !important;
     left: 50% !important;
     transform: translateX(-50%) !important;
     z-index: 30 !important;
     width: 100% !important;
-    margin-bottom: 0 !important;
+    will-change: transform, opacity !important;
   }
   .discover-header-block .body-m.grey {
-    font-size: 14px !important;
-    letter-spacing: 0.08em !important;
+    font-size: 15px !important;
+    letter-spacing: 0.1em !important;
     text-transform: uppercase !important;
     color: #64748b !important;
-    margin-bottom: 4px !important;
+    margin-bottom: 6px !important;
   }
   .discover-header-block .heading-h1.white {
-    font-size: clamp(32px, 4vw, 48px) !important;
+    font-size: clamp(34px, 4.2vw, 52px) !important;
     font-weight: 900 !important;
     letter-spacing: -0.02em !important;
     color: #ffffff !important;
+    line-height: 1.15 !important;
   }
   .mobiles-block {
     display: flex !important;
@@ -903,33 +915,32 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     justify-content: center !important;
     position: relative !important;
     width: 100% !important;
-    height: min(580px, 68vh) !important;
-    margin-top: 20px !important;
+    height: 100% !important;
   }
   .discovery-mobile {
     position: absolute !important;
-    width: min(320px, 24vw) !important;
-    height: auto !important;
+    height: min(56vh, 480px) !important;
+    width: auto !important;
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
-    justify-content: flex-start !important;
+    justify-content: center !important;
     will-change: transform, opacity !important;
     cursor: pointer !important;
   }
-  .discovery-mobile.left {
-    z-index: 15 !important;
-  }
   .discovery-mobile.center {
-    z-index: 25 !important;
+    z-index: 20 !important;
+  }
+  .discovery-mobile.left {
+    z-index: 10 !important;
   }
   .discovery-mobile.right {
-    z-index: 15 !important;
+    z-index: 10 !important;
   }
   .discovery-mobile .image {
-    width: 100% !important;
-    height: min(440px, 48vh) !important;
-    max-height: 440px !important;
+    height: 100% !important;
+    width: auto !important;
+    max-width: 320px !important;
     object-fit: contain !important;
     filter: drop-shadow(0 25px 50px rgba(0, 0, 0, 0.95)) !important;
     border-radius: 40px !important;
@@ -937,25 +948,29 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     transition: filter 0.35s ease !important;
   }
   .discovery-mobile:hover .image {
-    filter: drop-shadow(0 30px 60px rgba(59, 130, 246, 0.35)) drop-shadow(0 20px 40px rgba(0, 0, 0, 0.95)) !important;
+    filter: drop-shadow(0 30px 60px rgba(59, 130, 246, 0.4)) drop-shadow(0 20px 40px rgba(0, 0, 0, 0.95)) !important;
   }
   .down-position-block {
-    position: relative !important;
-    margin-top: 10px !important;
+    position: absolute !important;
+    bottom: -88px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
     text-align: center !important;
     width: 100% !important;
-    max-width: 290px !important;
+    min-width: 270px !important;
+    max-width: 310px !important;
     will-change: opacity, transform !important;
+    pointer-events: none !important;
   }
   .down-text-block .heading-h4 {
-    font-size: 20px !important;
+    font-size: 21px !important;
     font-weight: 800 !important;
     color: #ffffff !important;
-    margin: 0 0 3px !important;
+    margin: 0 0 4px !important;
   }
   .down-text-block .body-s.grey {
-    font-size: 13px !important;
-    line-height: 1.35 !important;
+    font-size: 13.5px !important;
+    line-height: 1.4 !important;
     color: #94a3b8 !important;
     margin: 0 !important;
   }
@@ -3139,6 +3154,7 @@ document.addEventListener('DOMContentLoaded', function() {
 (function() {
   function initChannelPhonesScroll() {
     var section = document.querySelector('.discover-sc');
+    var headerBlock = document.querySelector('.discover-sc .discover-header-block');
     var leftPhone = document.querySelector('.discovery-mobile.left');
     var centerPhone = document.querySelector('.discovery-mobile.center');
     var rightPhone = document.querySelector('.discovery-mobile.right');
@@ -3150,12 +3166,22 @@ document.addEventListener('DOMContentLoaded', function() {
     var targetP = 0;
     var isRunning = false;
 
+    // Set phone block widths preserving aspect ratio like EventBeds
+    function setBlocksWidth() {
+      var blocks = document.querySelectorAll('.discovery-mobile');
+      blocks.forEach(function(block) {
+        var h = block.clientHeight;
+        if (h > 50) {
+          block.style.width = (h / 2.0) + 'px';
+        }
+      });
+    }
+
     function calculateProgress() {
       if (window.innerWidth < 992) return;
       var rect = section.getBoundingClientRect();
       var windowH = window.innerHeight || document.documentElement.clientHeight;
       
-      // Total scrollable distance inside sticky section
       var totalScrollable = rect.height - windowH;
       if (totalScrollable <= 0) totalScrollable = 1;
       
@@ -3175,61 +3201,70 @@ document.addEventListener('DOMContentLoaded', function() {
         return;
       }
       var diff = targetP - currentP;
-      if (Math.abs(diff) > 0.0003) {
-        currentP += diff * 0.14;
+      if (Math.abs(diff) > 0.0002) {
+        currentP += diff * 0.16;
       } else {
         currentP = targetP;
       }
 
       var p = currentP;
 
-      // 1. Rise / Elevation Phase (p: 0 -> 0.35): Deck enters with gentle rise (+45px -> 0px) so phones remain 100% visible inside viewport
-      var riseP = Math.min(1, p * 2.8);
-      var riseY = (1 - riseP) * 45; // starts at +45px, elevates to 0px (never cuts off)
+      // EventBeds Animation Mapping: Progress 0.0 -> 0.70 is the primary active timeline
+      var timelineP = Math.min(1, p / 0.70);
+      // Smooth cubic bezier easing
+      var ease = timelineP < 0.5 
+        ? 4 * timelineP * timelineP * timelineP 
+        : 1 - Math.pow(-2 * timelineP + 2, 3) / 2;
 
-      // 2. Fanning Spread Phase (p: 0.15 -> 0.80): Left and Right phones slide out horizontally
-      var spreadP = Math.max(0, Math.min(1, (p - 0.15) / 0.65));
-      var spread = 1 - Math.pow(1 - spreadP, 3);
+      // Vertical translation (translateY: starts at 38vh peek, rises to 0vh centered)
+      var windowH = window.innerHeight || 800;
+      var startY = Math.min(280, windowH * 0.35);
+      var currentY = (1 - ease) * startY;
 
       // Horizontal spread distance based on screen width
-      var maxSpreadX = Math.min(370, window.innerWidth * 0.27);
-      var leftInitialX = -60;
-      var leftFinalX = -maxSpreadX;
-      var leftX = leftInitialX + (leftFinalX - leftInitialX) * spread;
+      var maxSpreadX = Math.min(380, window.innerWidth * 0.28);
+      var startSpreadPercent = 0.65; // ~70% tucked behind in EventBeds
+      var startSpreadX = (centerPhone.offsetWidth || 240) * startSpreadPercent;
+      
+      var leftX = - (startSpreadX + (maxSpreadX - startSpreadX) * ease);
+      var rightX = startSpreadX + (maxSpreadX - startSpreadX) * ease;
 
-      var rightInitialX = 60;
-      var rightFinalX = maxSpreadX;
-      var rightX = rightInitialX + (rightFinalX - rightInitialX) * spread;
+      // Center phone scale: starts prominent at 1.14, settles to 1.0
+      var centerScale = 1.14 - (0.14 * ease);
+      // Side phones scale: starts at 0.88, settles to 0.98
+      var sideScale = 0.88 + (0.10 * ease);
 
-      // Slight rotation & scale for 3D realism
-      var leftRot = (-3.0 * (1 - spread)) + (-1.0 * spread);
-      var rightRot = (3.0 * (1 - spread)) + (1.0 * spread);
-      var sideScale = 0.95 + (0.05 * spread);
-      var centerScale = 1.0 + (0.03 * spread);
+      // 3D rotations for realistic card fanning
+      var leftRot = (-3.5 * (1 - ease)) + (-1.0 * ease);
+      var rightRot = (3.5 * (1 - ease)) + (1.0 * ease);
 
-      var sideY = riseY + ((1 - spread) * 8);
-      var centerY = riseY - (spread * 6);
-
-      leftPhone.style.transform = 'translate3d(' + leftX.toFixed(2) + 'px, ' + sideY.toFixed(2) + 'px, 0) rotate(' + leftRot.toFixed(2) + 'deg) scale(' + sideScale.toFixed(3) + ')';
+      leftPhone.style.transform = 'translate3d(' + leftX.toFixed(2) + 'px, ' + currentY.toFixed(2) + 'px, 0) rotate(' + leftRot.toFixed(2) + 'deg) scale(' + sideScale.toFixed(3) + ')';
       leftPhone.style.opacity = '1';
 
-      rightPhone.style.transform = 'translate3d(' + rightX.toFixed(2) + 'px, ' + sideY.toFixed(2) + 'px, 0) rotate(' + rightRot.toFixed(2) + 'deg) scale(' + sideScale.toFixed(3) + ')';
+      rightPhone.style.transform = 'translate3d(' + rightX.toFixed(2) + 'px, ' + currentY.toFixed(2) + 'px, 0) rotate(' + rightRot.toFixed(2) + 'deg) scale(' + sideScale.toFixed(3) + ')';
       rightPhone.style.opacity = '1';
 
-      centerPhone.style.transform = 'translate3d(0, ' + centerY.toFixed(2) + 'px, 0) scale(' + centerScale.toFixed(3) + ')';
+      centerPhone.style.transform = 'translate3d(0, ' + currentY.toFixed(2) + 'px, 0) scale(' + centerScale.toFixed(3) + ')';
       centerPhone.style.opacity = '1';
 
-      // 3. Text Descriptions Phase (p: 0.38 -> 0.80): Smoothly fade in and slide up under each phone
-      var textProgress = Math.max(0, Math.min(1, (p - 0.38) / 0.42));
+      // Header block animation (scale 1.35 -> 1.0)
+      if (headerBlock) {
+        var headerScale = 1.35 - (0.35 * ease);
+        var headerY = (1 - ease) * 15;
+        headerBlock.style.transform = 'translateX(-50%) translate3d(0, ' + headerY.toFixed(1) + 'px, 0) scale(' + headerScale.toFixed(3) + ')';
+      }
+
+      // Text Descriptions Phase (p: 0.35 -> 0.70): Smoothly fade in and slide up
+      var textProgress = Math.max(0, Math.min(1, (p - 0.35) / 0.35));
       var textOp = textProgress;
-      var textY = (1 - textProgress) * 16;
+      var textY = (1 - textProgress) * 18;
 
       downTexts.forEach(function(dt) {
         dt.style.opacity = textOp.toFixed(2);
-        dt.style.transform = 'translate3d(0, ' + textY.toFixed(1) + 'px, 0)';
+        dt.style.transform = 'translateX(-50%) translate3d(0, ' + textY.toFixed(1) + 'px, 0)';
       });
 
-      if (Math.abs(diff) > 0.0003) {
+      if (Math.abs(diff) > 0.0002) {
         requestAnimationFrame(updateLoop);
       } else {
         isRunning = false;
@@ -3237,9 +3272,13 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     window.addEventListener('scroll', calculateProgress, { passive: true });
-    window.addEventListener('resize', calculateProgress, { passive: true });
+    window.addEventListener('resize', function() {
+      setBlocksWidth();
+      calculateProgress();
+    }, { passive: true });
     
-    // Initial run to calculate on load
+    // Initial runs
+    setBlocksWidth();
     calculateProgress();
   }
 
