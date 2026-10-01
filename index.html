@@ -919,7 +919,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   }
   .discovery-mobile {
     position: absolute !important;
-    top: 46% !important;
+    top: 40% !important;
     left: 50% !important;
     width: clamp(280px, 24vw, 360px) !important;
     height: auto !important;
@@ -941,7 +941,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   }
   .discovery-mobile .image {
     width: 100% !important;
-    height: clamp(380px, 54vh, 520px) !important;
+    height: clamp(340px, 48vh, 460px) !important;
     object-fit: contain !important;
     filter: drop-shadow(0 25px 55px rgba(0, 0, 0, 0.95)) !important;
     border-radius: 44px !important;
@@ -954,11 +954,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   }
   .down-position-block {
     position: relative !important;
-    margin-top: 18px !important;
+    margin-top: 16px !important;
     text-align: left !important;
     width: 100% !important;
     max-width: 320px !important;
-    padding-left: 6px !important;
+    padding: 0 6px !important;
     will-change: opacity, transform !important;
   }
   .down-text-block .heading-h4 {
@@ -969,9 +969,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     letter-spacing: -0.01em !important;
   }
   .down-text-block .body-s.grey {
-    font-size: 14px !important;
-    line-height: 1.5 !important;
-    color: #94a3b8 !important;
+    font-size: 14.5px !important;
+    line-height: 1.55 !important;
+    color: #cbd5e1 !important;
     margin: 0 !important;
   }
 }
@@ -3207,7 +3207,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
       // Vertical translation (subtle initial elevation that keeps phone + description visible)
       var windowH = window.innerHeight || 800;
-      var startY = Math.min(80, windowH * 0.10);
+      var startY = Math.min(50, windowH * 0.06);
       var currentY = (1 - ease) * startY;
 
       // Horizontal spread distance based on screen width
@@ -3226,10 +3226,10 @@ document.addEventListener('DOMContentLoaded', function() {
       var leftRot = (-3.5 * (1 - ease)) + (-0.5 * ease);
       var rightRot = (3.5 * (1 - ease)) + (0.5 * ease);
 
-      leftPhone.style.transform = 'translate3d(calc(-50% + ' + leftX.toFixed(2) + 'px), calc(-50% + ' + (currentY + 6).toFixed(2) + 'px), 0) rotate(' + leftRot.toFixed(2) + 'deg) scale(' + sideScale.toFixed(3) + ')';
+      leftPhone.style.transform = 'translate3d(calc(-50% + ' + leftX.toFixed(2) + 'px), calc(-50% + ' + (currentY + 4).toFixed(2) + 'px), 0) rotate(' + leftRot.toFixed(2) + 'deg) scale(' + sideScale.toFixed(3) + ')';
       leftPhone.style.opacity = '1';
 
-      rightPhone.style.transform = 'translate3d(calc(-50% + ' + rightX.toFixed(2) + 'px), calc(-50% + ' + (currentY + 6).toFixed(2) + 'px), 0) rotate(' + rightRot.toFixed(2) + 'deg) scale(' + sideScale.toFixed(3) + ')';
+      rightPhone.style.transform = 'translate3d(calc(-50% + ' + rightX.toFixed(2) + 'px), calc(-50% + ' + (currentY + 4).toFixed(2) + 'px), 0) rotate(' + rightRot.toFixed(2) + 'deg) scale(' + sideScale.toFixed(3) + ')';
       rightPhone.style.opacity = '1';
 
       centerPhone.style.transform = 'translate3d(-50%, calc(-50% + ' + currentY.toFixed(2) + 'px), 0) scale(' + centerScale.toFixed(3) + ')';
@@ -3245,9 +3245,9 @@ document.addEventListener('DOMContentLoaded', function() {
       }
 
       // Text Descriptions Phase: Smoothly fade in and slide up as cards fan out
-      var textProgress = Math.max(0, Math.min(1, (timelineP - 0.15) / 0.55));
-      var textOp = 0.2 + (0.8 * textProgress);
-      var textY = (1 - textProgress) * 12;
+      var textProgress = Math.max(0, Math.min(1, (timelineP - 0.10) / 0.50));
+      var textOp = 0.35 + (0.65 * textProgress);
+      var textY = (1 - textProgress) * 10;
 
       downTexts.forEach(function(dt) {
         dt.style.opacity = textOp.toFixed(2);
