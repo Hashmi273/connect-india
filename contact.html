@@ -3,6 +3,9 @@
 <head>
   <meta charset="utf-8"/>
   <link href="https://cdn.prod.website-files.com" rel="preconnect" crossorigin="anonymous"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,800;1,900&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <title>Contact Us | Connect INDIA™ — Enterprise CPaaS & Cloud Communications</title>
   <meta content="Connect with Connect INDIA™ solution architects. Get enterprise pricing, sandbox access, API documentation, and dedicated 24/7 technical support." name="description"/>
   <meta content="Contact Connect INDIA™" property="og:title"/>
@@ -13,7 +16,11 @@
   <link rel="icon" href="https://cdn.prod.website-files.com/64d9d44b74f7cd98eec10d8d/66fec47fa50a6c7ef858621e_favicon.avif" type="image/png"/>
 
   <style>
-    /* Exact EventBeds Base Typography & Theme Matching index.html */
+    /* Exact EventBeds & Tools Section Typography Matching 2nd Image */
+    * {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+    }
+
     ::selection {
       background-color: #8D8AFF;
       color: white;
@@ -22,9 +29,34 @@
     body {
       background-color: #ffffff !important;
       color: #0b0f19 !important;
-      font-family: Roobert, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
       overflow-x: hidden !important;
       margin: 0 !important;
+    }
+
+    /* Tools Section Font Style (Exact Match with 2nd Image) */
+    .tools-main-title {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif !important;
+      font-size: clamp(34px, 4.5vw, 54px) !important;
+      font-weight: 900 !important;
+      color: #0b0f19 !important;
+      letter-spacing: -0.035em !important;
+      margin: 0 0 10px !important;
+      line-height: 1.15 !important;
+    }
+
+    .tools-highlight-blue {
+      color: #2563eb !important;
+      display: inline-block !important;
+    }
+
+    .tools-sub-title {
+      font-family: 'Plus Jakarta Sans', sans-serif !important;
+      font-size: 17px !important;
+      color: #64748b !important;
+      font-weight: 500 !important;
+      letter-spacing: -0.01em !important;
+      line-height: 1.5 !important;
     }
 
     /* Fixed Top Navbar with EventBeds Styling */
@@ -69,10 +101,11 @@
       align-items: center;
       gap: 8px;
       font-size: 14px;
-      font-weight: 600;
+      font-weight: 700;
       color: #64748b;
       margin-bottom: 16px;
       letter-spacing: 0.04em;
+      text-transform: uppercase;
       position: relative;
       z-index: 2;
     }
@@ -87,30 +120,32 @@
     }
 
     .contact-main-heading {
-      font-size: clamp(36px, 5.5vw, 64px);
-      font-weight: 900;
-      line-height: 1.08;
-      letter-spacing: -0.03em;
-      color: #0b0f19;
-      margin: 0 auto 16px;
-      max-width: 960px;
-      position: relative;
-      z-index: 2;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif !important;
+      font-size: clamp(36px, 5.5vw, 64px) !important;
+      font-weight: 900 !important;
+      line-height: 1.08 !important;
+      letter-spacing: -0.035em !important;
+      color: #0b0f19 !important;
+      margin: 0 auto 16px !important;
+      max-width: 960px !important;
+      position: relative !important;
+      z-index: 2 !important;
     }
 
     .contact-main-heading .green-dot {
-      color: #22c55e;
+      color: #22c55e !important;
     }
 
     .contact-hero-sub {
-      font-size: clamp(16px, 1.8vw, 19px);
-      color: #64748b;
-      max-width: 680px;
-      margin: 0 auto;
-      line-height: 1.6;
-      font-weight: 400;
-      position: relative;
-      z-index: 2;
+      font-family: 'Plus Jakarta Sans', sans-serif !important;
+      font-size: clamp(16px, 1.8vw, 19px) !important;
+      color: #64748b !important;
+      max-width: 680px !important;
+      margin: 0 auto !important;
+      line-height: 1.6 !important;
+      font-weight: 500 !important;
+      position: relative !important;
+      z-index: 2 !important;
     }
 
     /* Main Form & Cards Section */
@@ -141,18 +176,19 @@
     }
 
     .form-header-box {
-      margin-bottom: 32px;
+      margin-bottom: 28px;
     }
 
     .form-title {
-      font-size: 26px;
-      font-weight: 900;
-      color: #0b0f19;
-      letter-spacing: -0.02em;
-      margin: 0 0 8px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
+      font-family: 'Plus Jakarta Sans', sans-serif !important;
+      font-size: 32px !important;
+      font-weight: 900 !important;
+      color: #0b0f19 !important;
+      letter-spacing: -0.035em !important;
+      margin: 0 0 8px !important;
+      display: flex !important;
+      align-items: center !important;
+      gap: 12px !important;
     }
 
     .form-title-icon {
@@ -722,10 +758,10 @@
       <span class="contact-pulse-dot"></span>
       Direct Enterprise Support &amp; Integration
     </div>
-    <h1 class="contact-main-heading">
-      Let's Power Your Messaging at Scale<span class="green-dot">.</span>
+    <h1 class="tools-main-title" style="font-size: clamp(36px, 5.5vw, 64px) !important; margin: 0 auto 14px !important;">
+      Let's Power Your Messaging at <span class="tools-highlight-blue">Scale</span><span class="green-dot">.</span>
     </h1>
-    <p class="contact-hero-sub">
+    <p class="tools-sub-title" style="max-width: 680px; margin: 0 auto 10px; font-size: 18px;">
       Have a question regarding bulk operator routing, RCS rich cards, WhatsApp Business verification, or custom TPS scaling? Our messaging engineers are standing by.
     </p>
   </section>
@@ -737,11 +773,10 @@
       <!-- Left: Clean EventBeds Form Container -->
       <div class="form-white-card">
         <div class="form-header-box">
-          <h2 class="form-title">
-            <div class="form-title-icon">💬</div>
-            Send Us a Message
+          <h2 class="tools-main-title" style="font-size: 32px !important; margin: 0 0 8px !important; display: flex; align-items: center; gap: 10px;">
+            <span style="font-size: 28px;">💬</span> Send Us a <span class="tools-highlight-blue">Message</span>
           </h2>
-          <div class="form-subtitle">
+          <div class="tools-sub-title" style="font-size: 15.5px !important; margin: 0 !important;">
             Fill out your details below and our team will get back to you with custom documentation and volume pricing within 30 minutes.
           </div>
         </div>
@@ -833,6 +868,9 @@
         
         <!-- Card 1: Direct Support & Sales Contact -->
         <div class="info-white-card">
+          <h3 class="tools-main-title" style="font-size: 20px !important; margin: 0 0 20px !important;">
+            Direct <span class="tools-highlight-blue">Channels</span> &amp; NOC
+          </h3>
           <div class="info-row-item">
             <div class="info-icon-badge">
               <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -885,11 +923,11 @@
               </svg>
             </div>
             <div>
-              <h3 style="font-size: 18px; font-weight: 800; margin: 0; color: #0f172a;">WhatsApp Instant Demo</h3>
+              <h3 class="tools-main-title" style="font-size: 19px !important; margin: 0 !important; color: #0f172a;">WhatsApp Instant <span style="color: #16a34a;">Demo</span></h3>
               <div style="font-size: 13px; color: #16a34a; font-weight: 600;">Active Now • Avg response &lt; 2 mins</div>
             </div>
           </div>
-          <p style="font-size: 14px; color: #64748b; margin: 0 0 14px; line-height: 1.5;">
+          <p class="tools-sub-title" style="font-size: 14px !important; margin: 0 0 14px !important; line-height: 1.5;">
             Experience our automated interactive catalogs, OTP triggers, and rich media bots directly on your own device.
           </p>
           <a href="https://api.whatsapp.com/send?phone=919800000000&text=Hi%20Connect%20INDIA%2C%20I%20would%20like%20to%20request%20a%20demo%20of%20your%20CPaaS%20platform." target="_blank" class="whatsapp-action-btn">
@@ -899,11 +937,11 @@
 
         <!-- Card 3: Enterprise SLA Guarantees -->
         <div class="info-white-card">
-          <h3 style="font-size: 16px; font-weight: 800; margin: 0 0 12px; color: #0f172a; display: flex; align-items: center; gap: 8px;">
+          <h3 class="tools-main-title" style="font-size: 18px !important; margin: 0 0 12px !important; color: #0f172a; display: flex; align-items: center; gap: 8px;">
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
               <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
             </svg>
-            Carrier-Grade Reliability
+            Carrier-Grade <span class="tools-highlight-blue">Reliability</span>
           </h3>
           <div class="sla-cards-grid">
             <div class="sla-metric-box">
@@ -934,8 +972,8 @@
   <section class="faq-light-sc">
     <div class="faq-inner-wrap">
       <div class="faq-section-header">
-        <div class="body-m grey" style="font-weight: 600; color: #64748b; margin-bottom: 8px;">Frequently Asked Questions</div>
-        <h2 class="heading-h1" style="font-size: clamp(30px, 4.5vw, 46px); font-weight: 900; color: #0b0f19;">Everything You Need to Know</h2>
+        <div class="body-m grey" style="font-weight: 700; color: #64748b; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.05em; font-size: 13px;">Frequently Asked Questions</div>
+        <h2 class="tools-main-title" style="font-size: clamp(30px, 4.5vw, 46px) !important; margin: 0 auto 10px !important;">Frequently Asked <span class="tools-highlight-blue">Questions</span></h2>
       </div>
 
       <div class="faq-accordion-list">
