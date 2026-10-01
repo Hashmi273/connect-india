@@ -81,7 +81,23 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   	background-color: #cfe16f;
   }
 
-  /* Navbar Top Indian Tricolor Micro-Line & Menu Button Removal */
+  /* 1. Permanent Crisp White Navbar across ALL states, scroll positions & devices */
+  .navbar,
+  .navbar.min,
+  .navbar.change,
+  .navbar.change.min,
+  .navbar.min.change,
+  div[navbar-element],
+  div[navbar-element-min] {
+    background: rgba(255, 255, 255, 0.96) !important;
+    background-color: rgba(255, 255, 255, 0.96) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    border: 1px solid rgba(0, 0, 0, 0.08) !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06) !important;
+  }
+
+  /* 2. Indian Flag Tricolor Micro-Line on top edge */
   .navbar::before {
     content: '';
     position: absolute;
@@ -91,10 +107,73 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     height: 3px;
     background: linear-gradient(90deg, #FF9933 0%, #FF7722 35%, #ffffff 50%, #138808 100%);
     z-index: 1001;
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit;
   }
 
   .menu-button, .w-nav-button {
     display: none !important;
+  }
+
+  /* 3. High-Definition Logo Presentation */
+  .navbar .brand,
+  .navbar .brand.w-nav-brand {
+    display: flex !important;
+    align-items: center !important;
+    text-decoration: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .navbar .brand img {
+    height: 52px !important;
+    max-height: 56px !important;
+    width: auto !important;
+    object-fit: contain !important;
+    display: block !important;
+    filter: none !important;
+    opacity: 1 !important;
+  }
+
+  /* 4. Navigation Links & Text */
+  .navbar .nav-link {
+    color: #0f172a !important;
+  }
+
+  /* 5. Book Demo Action Button - Crisp, High Visibility */
+  .menu-black-button.desktop,
+  .menu-black-button.mobile {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: #0b0f19 !important;
+    background-color: #0b0f19 !important;
+    border: 1.5px solid rgba(0, 0, 0, 0.12) !important;
+    border-radius: 9999px !important;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15) !important;
+    padding: 0 20px !important;
+    height: 42px !important;
+    min-height: 42px !important;
+    text-decoration: none !important;
+    transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1) !important;
+  }
+
+  .menu-black-button.desktop:hover,
+  .menu-black-button.mobile:hover {
+    background: #ea580c !important;
+    background-color: #ea580c !important;
+    border-color: #ea580c !important;
+    transform: translateY(-1px) scale(1.02);
+    box-shadow: 0 6px 20px rgba(234, 88, 12, 0.35) !important;
+  }
+
+  .menu-black-button .menu-button-text,
+  .menu-black-button .button-text {
+    color: #ffffff !important;
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    letter-spacing: -0.01em !important;
+    line-height: 1 !important;
   }
 </style><!-- [Attributes by Finsweet] Disable scrolling -->
 <script defer src="https://cdn.jsdelivr.net/npm/@finsweet/attributes-scrolldisable@1/scrolldisable.js"></script>
@@ -1406,8 +1485,8 @@ img {
     align-items: center !important;
   }
   .navbar .brand img {
-    height: 24px !important;
-    max-height: 24px !important;
+    height: 38px !important;
+    max-height: 42px !important;
     width: auto !important;
     display: block !important;
     object-fit: contain !important;
@@ -1505,8 +1584,8 @@ img {
     top: 10px !important;
   }
   .navbar .brand img {
-    height: 20px !important;
-    max-height: 20px !important;
+    height: 32px !important;
+    max-height: 34px !important;
   }
   .menu-black-button.desktop {
     height: 32px !important;
