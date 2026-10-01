@@ -280,116 +280,171 @@
       margin-top: 4px;
     }
 
+    @media (max-width: 640px) {
+      .services-choice-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+      }
+    }
+
     .service-pill-option {
       position: relative;
       cursor: pointer;
       user-select: none;
+      display: block;
+      margin: 0;
     }
 
     .service-pill-option input {
       position: absolute;
       opacity: 0;
       cursor: pointer;
+      width: 0;
+      height: 0;
     }
 
     .pill-content {
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 12px 14px;
-      background: #f8fafc;
+      padding: 13px 18px;
+      background: #ffffff;
       border: 1.5px solid #e2e8f0;
-      border-radius: 14px;
-      font-size: 13.5px;
+      border-radius: 12px;
+      font-size: 14.5px;
       font-weight: 600;
-      color: #475569;
-      transition: all 0.2s ease;
+      color: #334155;
+      letter-spacing: -0.01em;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
       text-align: center;
-      gap: 6px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+      user-select: none;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
-    /* Distinct Service Pill Styles (Each with its unique brand color) */
+    .service-pill-option:hover .pill-content {
+      border-color: #cbd5e1;
+      background: #f8fafc;
+      color: #0f172a;
+    }
+
+    /* Distinct Service Pill Styles (Clean text, unique high-contrast brand colors without emojis) */
     .service-pill-sms input:checked ~ .pill-content {
       background: #eff6ff !important;
       border-color: #2563eb !important;
       color: #1d4ed8 !important;
-      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.18) !important;
+      font-weight: 700 !important;
+      box-shadow: 0 3px 12px rgba(37, 99, 235, 0.16) !important;
     }
 
     .service-pill-rcs input:checked ~ .pill-content {
       background: #ecfeff !important;
       border-color: #06b6d4 !important;
-      color: #0e7490 !important;
-      box-shadow: 0 4px 14px rgba(6, 182, 212, 0.2) !important;
+      color: #0891b2 !important;
+      font-weight: 700 !important;
+      box-shadow: 0 3px 12px rgba(6, 182, 212, 0.16) !important;
     }
 
     .service-pill-wa input:checked ~ .pill-content {
       background: #f0fdf4 !important;
-      border-color: #22c55e !important;
+      border-color: #16a34a !important;
       color: #15803d !important;
-      box-shadow: 0 4px 14px rgba(34, 197, 94, 0.2) !important;
+      font-weight: 700 !important;
+      box-shadow: 0 3px 12px rgba(22, 163, 74, 0.16) !important;
     }
 
     .service-pill-voice input:checked ~ .pill-content {
       background: #faf5ff !important;
-      border-color: #8b5cf6 !important;
-      color: #6d28d9 !important;
-      box-shadow: 0 4px 14px rgba(139, 92, 246, 0.2) !important;
+      border-color: #9333ea !important;
+      color: #7e22ce !important;
+      font-weight: 700 !important;
+      box-shadow: 0 3px 12px rgba(147, 51, 234, 0.16) !important;
     }
 
     .service-pill-ivr input:checked ~ .pill-content {
       background: #fff7ed !important;
-      border-color: #f97316 !important;
+      border-color: #ea580c !important;
       color: #c2410c !important;
-      box-shadow: 0 4px 14px rgba(249, 115, 22, 0.2) !important;
+      font-weight: 700 !important;
+      box-shadow: 0 3px 12px rgba(234, 88, 12, 0.16) !important;
     }
 
     .service-pill-cpaas input:checked ~ .pill-content {
       background: #eef2ff !important;
-      border-color: #6366f1 !important;
+      border-color: #4f46e5 !important;
       color: #4338ca !important;
-      box-shadow: 0 4px 14px rgba(99, 102, 241, 0.2) !important;
+      font-weight: 700 !important;
+      box-shadow: 0 3px 12px rgba(79, 70, 229, 0.16) !important;
     }
 
-    /* Signature Black Button Style (Exact Match with 1st Image [Get started]) */
+    /* High Quality Premium Button Styles (Exact Match with Image 2 & 3 Book Demo / Accept / Deny All) */
     .eventbeds-submit-btn,
-    .whatsapp-action-btn,
     .menu-black-button.desktop,
     .menu-black-button.mobile,
     .primary-button,
     .secondary-button.submit,
     #closeModalButton {
-      background: #000000 !important;
+      background: #18181b !important;
       color: #ffffff !important;
-      font-family: 'Plus Jakarta Sans', -apple-system, sans-serif !important;
-      border: none !important;
-      border-radius: 14px !important;
-      padding: 16px 28px !important;
-      font-size: 16px !important;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif !important;
+      border: 1px solid rgba(0, 0, 0, 0.05) !important;
+      border-radius: 12px !important;
+      padding: 15px 28px !important;
+      font-size: 15.5px !important;
       font-weight: 700 !important;
-      letter-spacing: -0.01em !important;
+      letter-spacing: -0.015em !important;
       cursor: pointer !important;
-      display: flex !important;
+      display: inline-flex !important;
       align-items: center !important;
       justify-content: center !important;
-      gap: 10px !important;
-      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.2) !important;
-      transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1) !important;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12) !important;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
       text-decoration: none !important;
       box-sizing: border-box !important;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .whatsapp-action-btn {
+      background: #16a34a !important;
+      color: #ffffff !important;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif !important;
+      border: none !important;
+      border-radius: 12px !important;
+      padding: 14px 24px !important;
+      font-size: 15px !important;
+      font-weight: 700 !important;
+      letter-spacing: -0.015em !important;
+      cursor: pointer !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      box-shadow: 0 4px 14px rgba(22, 163, 74, 0.22) !important;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+      text-decoration: none !important;
+      box-sizing: border-box !important;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
     .eventbeds-submit-btn:hover,
-    .whatsapp-action-btn:hover,
     .menu-black-button.desktop:hover,
     .menu-black-button.mobile:hover,
     .primary-button:hover,
     .secondary-button.submit:hover,
     #closeModalButton:hover {
-      background: #1e293b !important;
+      background: #27272a !important;
       color: #ffffff !important;
-      transform: translateY(-2px) !important;
-      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.3) !important;
+      transform: translateY(-1.5px) !important;
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.2) !important;
+    }
+
+    .whatsapp-action-btn:hover {
+      background: #15803d !important;
+      color: #ffffff !important;
+      transform: translateY(-1.5px) !important;
+      box-shadow: 0 8px 22px rgba(22, 163, 74, 0.3) !important;
     }
 
     .menu-button-text, .button-text, .button-text.hover, .menu-button-text.hover {
@@ -812,8 +867,8 @@
       <!-- Left: Clean EventBeds Form Container -->
       <div class="form-white-card">
         <div class="form-header-box">
-          <h2 class="tools-main-title" style="font-size: 32px !important; margin: 0 0 8px !important; display: flex; align-items: center; gap: 10px;">
-            <span style="font-size: 28px;">💬</span> Send Us a <span class="tools-highlight-blue">Message</span>
+          <h2 class="tools-main-title" style="font-size: 32px !important; margin: 0 0 8px !important;">
+            Send Us a <span class="tools-highlight-blue">Message</span>
           </h2>
           <div class="tools-sub-title" style="font-size: 15.5px !important; margin: 0 !important;">
             Fill out your details below and our team will get back to you with custom documentation and volume pricing within 30 minutes.
@@ -849,27 +904,27 @@
             <div class="services-choice-grid">
               <label class="service-pill-option service-pill-sms">
                 <input type="checkbox" name="services" value="Bulk SMS" checked />
-                <div class="pill-content">💬 Bulk SMS</div>
+                <div class="pill-content">Bulk SMS</div>
               </label>
               <label class="service-pill-option service-pill-rcs">
                 <input type="checkbox" name="services" value="RCS Messaging" checked />
-                <div class="pill-content">🗨️ RCS Messaging</div>
+                <div class="pill-content">RCS Messaging</div>
               </label>
               <label class="service-pill-option service-pill-wa">
                 <input type="checkbox" name="services" value="WhatsApp API" checked />
-                <div class="pill-content">📱 WhatsApp API</div>
+                <div class="pill-content">WhatsApp API</div>
               </label>
               <label class="service-pill-option service-pill-voice">
                 <input type="checkbox" name="services" value="Voice & OBD" />
-                <div class="pill-content">📞 Voice &amp; OBD</div>
+                <div class="pill-content">Voice &amp; OBD</div>
               </label>
               <label class="service-pill-option service-pill-ivr">
                 <input type="checkbox" name="services" value="IVR Solutions" />
-                <div class="pill-content">📊 IVR System</div>
+                <div class="pill-content">IVR System</div>
               </label>
               <label class="service-pill-option service-pill-cpaas">
                 <input type="checkbox" name="services" value="Enterprise CPaaS" />
-                <div class="pill-content">⚡ CPaaS API</div>
+                <div class="pill-content">CPaaS API</div>
               </label>
             </div>
           </div>
@@ -882,11 +937,7 @@
 
           <!-- Signature Black Submit Button -->
           <button type="submit" class="eventbeds-submit-btn" id="submitFormBtn">
-            <span>Submit Request</span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="5" y1="12" x2="19" y2="12"></line>
-              <polyline points="12 5 19 12 12 19"></polyline>
-            </svg>
+            Submit Request
           </button>
         </form>
       </div>
@@ -959,7 +1010,7 @@
             Experience our automated interactive catalogs, OTP triggers, and rich media bots directly on your own device.
           </p>
           <a href="https://api.whatsapp.com/send?phone=919800000000&text=Hi%20Connect%20INDIA%2C%20I%20would%20like%20to%20request%20a%20demo%20of%20your%20CPaaS%20platform." target="_blank" class="whatsapp-action-btn">
-            <span>💬 Launch WhatsApp Demo</span>
+            Launch WhatsApp Demo
           </a>
         </div>
 
