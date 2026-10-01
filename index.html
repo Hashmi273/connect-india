@@ -871,13 +871,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     align-items: center !important;
     justify-content: center !important;
     position: relative !important;
-    padding: 20px 20px 20px !important;
+    padding: 20px 20px 10px !important;
     box-sizing: border-box !important;
   }
   .discover-header-block {
     text-align: center !important;
     position: absolute !important;
-    top: 30px !important;
+    top: 24px !important;
     left: 50% !important;
     transform: translateX(-50%) !important;
     z-index: 30 !important;
@@ -885,14 +885,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     margin-bottom: 0 !important;
   }
   .discover-header-block .body-m.grey {
-    font-size: 15px !important;
+    font-size: 14px !important;
     letter-spacing: 0.08em !important;
     text-transform: uppercase !important;
     color: #64748b !important;
     margin-bottom: 4px !important;
   }
   .discover-header-block .heading-h1.white {
-    font-size: clamp(34px, 4.5vw, 52px) !important;
+    font-size: clamp(32px, 4vw, 48px) !important;
     font-weight: 900 !important;
     letter-spacing: -0.02em !important;
     color: #ffffff !important;
@@ -903,12 +903,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     justify-content: center !important;
     position: relative !important;
     width: 100% !important;
-    height: 640px !important;
-    margin-top: 30px !important;
+    height: min(580px, 68vh) !important;
+    margin-top: 20px !important;
   }
   .discovery-mobile {
     position: absolute !important;
-    width: 350px !important;
+    width: min(320px, 24vw) !important;
     height: auto !important;
     display: flex !important;
     flex-direction: column !important;
@@ -928,10 +928,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   }
   .discovery-mobile .image {
     width: 100% !important;
-    height: 480px !important;
+    height: min(440px, 48vh) !important;
+    max-height: 440px !important;
     object-fit: contain !important;
     filter: drop-shadow(0 25px 50px rgba(0, 0, 0, 0.95)) !important;
-    border-radius: 42px !important;
+    border-radius: 40px !important;
     image-rendering: -webkit-optimize-contrast !important;
     transition: filter 0.35s ease !important;
   }
@@ -940,21 +941,21 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   }
   .down-position-block {
     position: relative !important;
-    margin-top: 14px !important;
+    margin-top: 10px !important;
     text-align: center !important;
     width: 100% !important;
-    max-width: 320px !important;
+    max-width: 290px !important;
     will-change: opacity, transform !important;
   }
   .down-text-block .heading-h4 {
-    font-size: 21px !important;
+    font-size: 20px !important;
     font-weight: 800 !important;
     color: #ffffff !important;
     margin: 0 0 3px !important;
   }
   .down-text-block .body-s.grey {
     font-size: 13px !important;
-    line-height: 1.4 !important;
+    line-height: 1.35 !important;
     color: #94a3b8 !important;
     margin: 0 !important;
   }
@@ -3182,33 +3183,32 @@ document.addEventListener('DOMContentLoaded', function() {
 
       var p = currentP;
 
-      // 1. Rise / Elevation Phase (p: 0 -> 0.40): Deck rises up from lower peek position into viewport center
-      var riseP = Math.min(1, p * 2.5);
-      var riseY = (1 - riseP) * 140; // starts at +140px (peeking), elevates to 0px
+      // 1. Rise / Elevation Phase (p: 0 -> 0.35): Deck enters with gentle rise (+45px -> 0px) so phones remain 100% visible inside viewport
+      var riseP = Math.min(1, p * 2.8);
+      var riseY = (1 - riseP) * 45; // starts at +45px, elevates to 0px (never cuts off)
 
-      // 2. Fanning Spread Phase (p: 0.20 -> 0.85): Left and Right phones slide out horizontally
-      var spreadP = Math.max(0, Math.min(1, (p - 0.18) / 0.62));
-      // Ease out cubic for fanning
+      // 2. Fanning Spread Phase (p: 0.15 -> 0.80): Left and Right phones slide out horizontally
+      var spreadP = Math.max(0, Math.min(1, (p - 0.15) / 0.65));
       var spread = 1 - Math.pow(1 - spreadP, 3);
 
       // Horizontal spread distance based on screen width
-      var maxSpreadX = Math.min(390, window.innerWidth * 0.285);
-      var leftInitialX = -75;
+      var maxSpreadX = Math.min(370, window.innerWidth * 0.27);
+      var leftInitialX = -60;
       var leftFinalX = -maxSpreadX;
       var leftX = leftInitialX + (leftFinalX - leftInitialX) * spread;
 
-      var rightInitialX = 75;
+      var rightInitialX = 60;
       var rightFinalX = maxSpreadX;
       var rightX = rightInitialX + (rightFinalX - rightInitialX) * spread;
 
       // Slight rotation & scale for 3D realism
-      var leftRot = (-3.5 * (1 - spread)) + (-1.5 * spread);
-      var rightRot = (3.5 * (1 - spread)) + (1.5 * spread);
-      var sideScale = 0.94 + (0.06 * spread);
-      var centerScale = 1.0 + (0.04 * spread);
+      var leftRot = (-3.0 * (1 - spread)) + (-1.0 * spread);
+      var rightRot = (3.0 * (1 - spread)) + (1.0 * spread);
+      var sideScale = 0.95 + (0.05 * spread);
+      var centerScale = 1.0 + (0.03 * spread);
 
-      var sideY = riseY + ((1 - spread) * 12);
-      var centerY = riseY - (spread * 8);
+      var sideY = riseY + ((1 - spread) * 8);
+      var centerY = riseY - (spread * 6);
 
       leftPhone.style.transform = 'translate3d(' + leftX.toFixed(2) + 'px, ' + sideY.toFixed(2) + 'px, 0) rotate(' + leftRot.toFixed(2) + 'deg) scale(' + sideScale.toFixed(3) + ')';
       leftPhone.style.opacity = '1';
@@ -3219,10 +3219,10 @@ document.addEventListener('DOMContentLoaded', function() {
       centerPhone.style.transform = 'translate3d(0, ' + centerY.toFixed(2) + 'px, 0) scale(' + centerScale.toFixed(3) + ')';
       centerPhone.style.opacity = '1';
 
-      // 3. Text Descriptions Phase (p: 0.45 -> 0.85): Smoothly fade in and slide up under each phone
-      var textProgress = Math.max(0, Math.min(1, (p - 0.42) / 0.40));
+      // 3. Text Descriptions Phase (p: 0.38 -> 0.80): Smoothly fade in and slide up under each phone
+      var textProgress = Math.max(0, Math.min(1, (p - 0.38) / 0.42));
       var textOp = textProgress;
-      var textY = (1 - textProgress) * 22;
+      var textY = (1 - textProgress) * 16;
 
       downTexts.forEach(function(dt) {
         dt.style.opacity = textOp.toFixed(2);
