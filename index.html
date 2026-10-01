@@ -723,7 +723,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
    ========================================================================== */
 .communication-tools-sc {
   padding-top: 90px !important;
-  padding-bottom: 110px !important;
+  padding-bottom: 140px !important;
   min-height: 600px !important;
   margin-bottom: 0 !important;
   position: relative !important;
@@ -732,9 +732,28 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   background: radial-gradient(ellipse 100% 70% at 50% 60%, #f4f8fc 0%, #ffffff 85%) !important;
 }
 
+/* Bottom Cloud/Mist Fade from White Tools to Black Channels */
+.communication-tools-sc::after {
+  content: '' !important;
+  position: absolute !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  height: 180px !important;
+  background: linear-gradient(to bottom, 
+    rgba(255, 255, 255, 0) 0%, 
+    rgba(255, 255, 255, 0.3) 25%, 
+    rgba(0, 0, 0, 0.4) 60%, 
+    rgba(0, 0, 0, 0.88) 85%, 
+    #000000 100%
+  ) !important;
+  pointer-events: none !important;
+  z-index: 25 !important;
+}
+
 .tools-container {
   position: relative !important;
-  z-index: 22 !important;
+  z-index: 28 !important;
 }
 
 .tools-badges-column {
@@ -744,7 +763,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 .tools-center-dock {
   position: relative !important;
-  z-index: 21 !important;
+  z-index: 27 !important;
 }
 
 /* ==========================================================================
@@ -770,6 +789,50 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   border: none !important;
   box-shadow: none !important;
   outline: none !important;
+}
+
+/* Tower Section Soft Mist Fade to Partners Showcase */
+.tower-sc {
+  position: relative !important;
+}
+
+.tower-sc::after {
+  content: '' !important;
+  position: absolute !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  height: 160px !important;
+  background: linear-gradient(to bottom, 
+    rgba(0, 0, 0, 0) 0%, 
+    rgba(0, 0, 0, 0.5) 45%, 
+    rgba(0, 0, 0, 0.95) 85%, 
+    #000000 100%
+  ) !important;
+  pointer-events: none !important;
+  z-index: 8 !important;
+}
+
+/* Partners Showcase Soft Mist Fade to Reviews Section */
+.part-sc {
+  position: relative !important;
+}
+
+.part-sc::after {
+  content: '' !important;
+  position: absolute !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  height: 140px !important;
+  background: linear-gradient(to bottom, 
+    rgba(0, 0, 0, 0) 0%, 
+    rgba(0, 0, 0, 0.35) 30%, 
+    rgba(255, 255, 255, 0.75) 75%, 
+    #ffffff 100%
+  ) !important;
+  pointer-events: none !important;
+  z-index: 15 !important;
 }
 
 /* ==========================================================================
