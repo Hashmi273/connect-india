@@ -915,12 +915,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     justify-content: center !important;
     position: relative !important;
     width: 100% !important;
-    height: min(600px, 72vh) !important;
-    margin-top: 35px !important;
+    height: min(620px, 72vh) !important;
+    margin-top: 40px !important;
   }
   .discovery-mobile {
     position: absolute !important;
-    width: clamp(270px, 23vw, 330px) !important;
+    top: 50% !important;
+    left: 50% !important;
+    width: clamp(260px, 22vw, 320px) !important;
     height: auto !important;
     display: flex !important;
     flex-direction: column !important;
@@ -3215,12 +3217,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
       // Vertical translation (subtle initial elevation that keeps phone + description visible)
       var windowH = window.innerHeight || 800;
-      var startY = Math.min(110, windowH * 0.12);
+      var startY = Math.min(80, windowH * 0.10);
       var currentY = (1 - ease) * startY;
 
       // Horizontal spread distance based on screen width
-      var maxSpreadX = Math.min(380, window.innerWidth * 0.28);
-      var startSpreadX = 70; // tucked behind in EventBeds
+      var maxSpreadX = Math.min(390, window.innerWidth * 0.285);
+      var startSpreadX = 65; // tucked behind in EventBeds
       
       var leftX = - (startSpreadX + (maxSpreadX - startSpreadX) * ease);
       var rightX = startSpreadX + (maxSpreadX - startSpreadX) * ease;
@@ -3234,13 +3236,13 @@ document.addEventListener('DOMContentLoaded', function() {
       var leftRot = (-3.5 * (1 - ease)) + (-0.5 * ease);
       var rightRot = (3.5 * (1 - ease)) + (0.5 * ease);
 
-      leftPhone.style.transform = 'translate3d(' + leftX.toFixed(2) + 'px, ' + (currentY + 6).toFixed(2) + 'px, 0) rotate(' + leftRot.toFixed(2) + 'deg) scale(' + sideScale.toFixed(3) + ')';
+      leftPhone.style.transform = 'translate3d(calc(-50% + ' + leftX.toFixed(2) + 'px), calc(-50% + ' + (currentY + 6).toFixed(2) + 'px), 0) rotate(' + leftRot.toFixed(2) + 'deg) scale(' + sideScale.toFixed(3) + ')';
       leftPhone.style.opacity = '1';
 
-      rightPhone.style.transform = 'translate3d(' + rightX.toFixed(2) + 'px, ' + (currentY + 6).toFixed(2) + 'px, 0) rotate(' + rightRot.toFixed(2) + 'deg) scale(' + sideScale.toFixed(3) + ')';
+      rightPhone.style.transform = 'translate3d(calc(-50% + ' + rightX.toFixed(2) + 'px), calc(-50% + ' + (currentY + 6).toFixed(2) + 'px), 0) rotate(' + rightRot.toFixed(2) + 'deg) scale(' + sideScale.toFixed(3) + ')';
       rightPhone.style.opacity = '1';
 
-      centerPhone.style.transform = 'translate3d(0, ' + currentY.toFixed(2) + 'px, 0) scale(' + centerScale.toFixed(3) + ')';
+      centerPhone.style.transform = 'translate3d(-50%, calc(-50% + ' + currentY.toFixed(2) + 'px), 0) scale(' + centerScale.toFixed(3) + ')';
       centerPhone.style.opacity = '1';
 
       // Header block animation (scale 1.25 -> 1.0)
@@ -3251,9 +3253,9 @@ document.addEventListener('DOMContentLoaded', function() {
       }
 
       // Text Descriptions Phase: Smoothly fade in and slide up as cards fan out
-      var textProgress = Math.max(0, Math.min(1, (timelineP - 0.20) / 0.55));
-      var textOp = 0.15 + (0.85 * textProgress);
-      var textY = (1 - textProgress) * 14;
+      var textProgress = Math.max(0, Math.min(1, (timelineP - 0.15) / 0.60));
+      var textOp = 0.2 + (0.8 * textProgress);
+      var textY = (1 - textProgress) * 12;
 
       downTexts.forEach(function(dt) {
         dt.style.opacity = textOp.toFixed(2);
