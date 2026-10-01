@@ -931,7 +931,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     position: relative !important;
     z-index: 25 !important;
     background-color: #000000 !important;
-    height: 220vh !important;
+    height: 280vh !important;
     padding: 0 !important;
     margin: 0 !important;
   }
@@ -1030,12 +1030,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   }
   .discovery-mobile.center {
     z-index: 20 !important;
+    opacity: 1 !important;
   }
   .discovery-mobile.left {
     z-index: 10 !important;
+    opacity: 0;
+    pointer-events: none;
   }
   .discovery-mobile.right {
     z-index: 10 !important;
+    opacity: 0;
+    pointer-events: none;
   }
   .discovery-mobile .image {
     width: 100% !important;
@@ -1057,6 +1062,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     width: 100% !important;
     max-width: 320px !important;
     padding: 0 6px !important;
+    opacity: 0;
+    transform: translate3d(0, 25px, 0);
     will-change: opacity, transform !important;
   }
   .down-text-block .heading-h4 {
@@ -3293,72 +3300,97 @@ document.addEventListener('DOMContentLoaded', function() {
         return;
       }
       var diff = targetP - currentP;
-      if (Math.abs(diff) > 0.0002) {
-        currentP += diff * 0.16;
+      if (Math.abs(diff) > 0.0001) {
+        currentP += diff * 0.15;
       } else {
         currentP = targetP;
       }
 
       var p = currentP;
 
-      // EventBeds Animation Mapping: Progress 0.0 -> 0.70 is the primary active timeline
-      var timelineP = Math.min(1, p / 0.70);
-      // Smooth cubic bezier easing
-      var ease = timelineP < 0.5 
-        ? 4 * timelineP * timelineP * timelineP 
-        : 1 - Math.pow(-2 * timelineP + 2, 3) / 2;
+      // =========================================================================
+      // EXACT 4-STAGE PINNED SEQUENCE TIMELINE (SCROLL-DRIVEN BIDIRECTIONAL SCRUB)
+      // =========================================================================
+      // Stage 1 (0.00 -> 0.15): Single Prominent Center Phone Hold (Side phones hidden)
+      // Stage 2 (0.15 -> 0.65): Center Phone scales down as Left & Right phones emerge & fan out
+      // Stage 3 (0.65 -> 0.85): 3 Phones lock on same baseline & Labels reveal underneath
+      // Stage 4 (0.85 -> 1.00): Exit transition - Cards move up & scale down into next section
+      // =========================================================================
 
-      // Vertical translation (subtle initial elevation that keeps phone + description visible)
-      var windowH = window.innerHeight || 800;
-      var startY = Math.min(50, windowH * 0.06);
-      var currentY = (1 - ease) * startY;
+      var windowW = window.innerWidth || 1200;
+      var maxSpreadX = Math.min(370, windowW * 0.28);
 
-      // Symmetric horizontal spread distance based on screen width
-      var maxSpreadX = Math.min(360, window.innerWidth * 0.27);
-      var startSpreadX = 60; // tucked behind center in EventBeds
-      
-      var spreadDist = startSpreadX + (maxSpreadX - startSpreadX) * ease;
-      var leftX = -spreadDist;
-      var rightX = spreadDist;
+      // --- Stage 2: Fan-out progress (0.12 -> 0.65) ---
+      var fanP = Math.max(0, Math.min(1, (p - 0.12) / 0.52));
+      var fanEase = fanP < 0.5 
+        ? 4 * fanP * fanP * fanP 
+        : 1 - Math.pow(-2 * fanP + 2, 3) / 2;
 
-      // Center phone scale: starts prominent at 1.10, settles to 1.0
-      var centerScale = 1.10 - (0.10 * ease);
-      // Side phones scale: starts at 0.90, settles to 0.98
-      var sideScale = 0.90 + (0.08 * ease);
+      // Spread X distance for left & right phones
+      var spreadX = maxSpreadX * fanEase;
 
-      // 3D rotations for realistic card fanning
-      var leftRot = (-3.5 * (1 - ease)) + (-0.5 * ease);
-      var rightRot = (3.5 * (1 - ease)) + (0.5 * ease);
+      // Center phone scale: starts prominent at 1.22, settles to 1.00
+      var centerScale = 1.22 - (0.22 * fanEase);
 
-      leftPhone.style.transform = 'translate3d(calc(-50% + ' + leftX.toFixed(2) + 'px), calc(-50% + ' + (currentY + 4).toFixed(2) + 'px), 0) rotate(' + leftRot.toFixed(2) + 'deg) scale(' + sideScale.toFixed(3) + ')';
-      leftPhone.style.opacity = '1';
+      // Side phones scale: starts small at 0.78 behind center, scales to 1.00
+      var sideScale = 0.78 + (0.22 * fanEase);
 
-      rightPhone.style.transform = 'translate3d(calc(-50% + ' + rightX.toFixed(2) + 'px), calc(-50% + ' + (currentY + 4).toFixed(2) + 'px), 0) rotate(' + rightRot.toFixed(2) + 'deg) scale(' + sideScale.toFixed(3) + ')';
-      rightPhone.style.opacity = '1';
+      // Side phones opacity: 0 initially, reveals rapidly as they fan out
+      var sideOpacity = Math.max(0, Math.min(1, (fanP - 0.02) * 2.8));
 
-      centerPhone.style.transform = 'translate3d(-50%, calc(-50% + ' + currentY.toFixed(2) + 'px), 0) scale(' + centerScale.toFixed(3) + ')';
+      // 3D card fanning rotation
+      var leftRot = -4.5 * (1 - fanEase);
+      var rightRot = 4.5 * (1 - fanEase);
+
+      // Vertical alignment offset as cards settle
+      var baselineY = (1 - fanEase) * 15;
+
+      // --- Stage 3: Labels & Descriptions Reveal (0.60 -> 0.85) ---
+      var labelP = Math.max(0, Math.min(1, (p - 0.58) / 0.24));
+      var labelEase = labelP < 0.5 
+        ? 2 * labelP * labelP 
+        : -1 + (4 - 2 * labelP) * labelP;
+      var textOp = labelEase;
+      var textY = (1 - labelEase) * 24;
+
+      // --- Stage 4: Exit Stage (0.85 -> 1.00) ---
+      var exitP = Math.max(0, Math.min(1, (p - 0.84) / 0.16));
+      var exitEase = exitP * exitP;
+      var exitY = -48 * exitEase; // Moves cards upwards
+      var exitScale = 1.00 - (0.08 * exitEase); // Shrinks cards slightly
+
+      // Apply transforms to Center Phone
+      var finalCenterScale = centerScale * exitScale;
+      var finalCenterY = baselineY + exitY;
+      centerPhone.style.transform = 'translate3d(-50%, calc(-50% + ' + finalCenterY.toFixed(2) + 'px), 0) scale(' + finalCenterScale.toFixed(3) + ')';
       centerPhone.style.opacity = '1';
+      centerPhone.style.zIndex = '20';
 
-      // Header block animation: fades out smoothly as cards fan out into full large size
-      if (headerBlock) {
-        var headerOpacity = Math.max(0, 1 - (timelineP * 1.5));
-        var headerScale = 1.20 - (0.20 * ease);
-        var headerY = (1 - ease) * 8;
-        headerBlock.style.opacity = headerOpacity.toFixed(2);
-        headerBlock.style.transform = 'translateX(-50%) translate3d(0, ' + headerY.toFixed(1) + 'px, 0) scale(' + headerScale.toFixed(3) + ')';
-      }
+      // Apply transforms to Left Phone
+      var finalSideScale = sideScale * exitScale;
+      var finalSideY = baselineY + exitY;
+      leftPhone.style.transform = 'translate3d(calc(-50% - ' + spreadX.toFixed(2) + 'px), calc(-50% + ' + finalSideY.toFixed(2) + 'px), 0) rotate(' + leftRot.toFixed(2) + 'deg) scale(' + finalSideScale.toFixed(3) + ')';
+      leftPhone.style.opacity = sideOpacity.toFixed(3);
+      leftPhone.style.pointerEvents = sideOpacity > 0.5 ? 'auto' : 'none';
 
-      // Text Descriptions Phase: Smoothly fade in and slide up as cards fan out
-      var textProgress = Math.max(0, Math.min(1, (timelineP - 0.10) / 0.50));
-      var textOp = 0.35 + (0.65 * textProgress);
-      var textY = (1 - textProgress) * 10;
+      // Apply transforms to Right Phone
+      rightPhone.style.transform = 'translate3d(calc(-50% + ' + spreadX.toFixed(2) + 'px), calc(-50% + ' + finalSideY.toFixed(2) + 'px), 0) rotate(' + rightRot.toFixed(2) + 'deg) scale(' + finalSideScale.toFixed(3) + ')';
+      rightPhone.style.opacity = sideOpacity.toFixed(3);
+      rightPhone.style.pointerEvents = sideOpacity > 0.5 ? 'auto' : 'none';
 
+      // Apply transforms to Labels
       downTexts.forEach(function(dt) {
-        dt.style.opacity = textOp.toFixed(2);
+        dt.style.opacity = textOp.toFixed(3);
         dt.style.transform = 'translate3d(0, ' + textY.toFixed(1) + 'px, 0)';
       });
 
-      if (Math.abs(diff) > 0.0002) {
+      // Header block elevation & subtle exit fade
+      if (headerBlock) {
+        var headerOpacity = Math.max(0, 1 - (exitP * 1.8));
+        headerBlock.style.opacity = headerOpacity.toFixed(3);
+      }
+
+      if (Math.abs(diff) > 0.0001) {
         requestAnimationFrame(updateLoop);
       } else {
         isRunning = false;
@@ -3368,7 +3400,7 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('scroll', calculateProgress, { passive: true });
     window.addEventListener('resize', calculateProgress, { passive: true });
     
-    // Initial run
+    // Initial calculation on load
     calculateProgress();
   }
 
