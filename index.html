@@ -1009,22 +1009,24 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    position: relative !important;
+    position: absolute !important;
+    inset: 0 !important;
     width: 100% !important;
     height: 100vh !important;
     margin: 0 !important;
     padding: 0 !important;
+    overflow: visible !important;
   }
   .discovery-mobile {
     position: absolute !important;
-    top: 40% !important;
+    top: 52% !important;
     left: 50% !important;
-    width: clamp(280px, 24vw, 360px) !important;
+    width: clamp(260px, 22vw, 320px) !important;
     height: auto !important;
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
-    justify-content: flex-start !important;
+    justify-content: center !important;
     will-change: transform, opacity !important;
     cursor: pointer !important;
   }
@@ -1044,10 +1046,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   }
   .discovery-mobile .image {
     width: 100% !important;
-    height: clamp(340px, 48vh, 460px) !important;
+    height: clamp(320px, 46vh, 440px) !important;
     object-fit: contain !important;
-    filter: drop-shadow(0 25px 55px rgba(0, 0, 0, 0.95)) !important;
-    border-radius: 44px !important;
+    filter: drop-shadow(0 20px 50px rgba(0, 0, 0, 0.95)) !important;
+    border-radius: 40px !important;
     image-rendering: -webkit-optimize-contrast !important;
     transition: filter 0.35s ease !important;
     display: block !important;
@@ -1057,25 +1059,25 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   }
   .down-position-block {
     position: relative !important;
-    margin-top: 16px !important;
-    text-align: left !important;
+    margin-top: 14px !important;
+    text-align: center !important;
     width: 100% !important;
-    max-width: 320px !important;
-    padding: 0 6px !important;
+    max-width: 280px !important;
+    padding: 0 4px !important;
     opacity: 0;
-    transform: translate3d(0, 25px, 0);
+    transform: translate3d(0, 20px, 0);
     will-change: opacity, transform !important;
   }
   .down-text-block .heading-h4 {
-    font-size: 24px !important;
+    font-size: 22px !important;
     font-weight: 800 !important;
     color: #ffffff !important;
-    margin: 0 0 6px !important;
+    margin: 0 0 4px !important;
     letter-spacing: -0.01em !important;
   }
   .down-text-block .body-s.grey {
-    font-size: 14.5px !important;
-    line-height: 1.55 !important;
+    font-size: 13.5px !important;
+    line-height: 1.5 !important;
     color: #cbd5e1 !important;
     margin: 0 !important;
   }
@@ -3301,7 +3303,7 @@ document.addEventListener('DOMContentLoaded', function() {
       }
       var diff = targetP - currentP;
       if (Math.abs(diff) > 0.0001) {
-        currentP += diff * 0.15;
+        currentP += diff * 0.16;
       } else {
         currentP = targetP;
       }
@@ -3309,72 +3311,66 @@ document.addEventListener('DOMContentLoaded', function() {
       var p = currentP;
 
       // =========================================================================
-      // EXACT 4-STAGE PINNED SEQUENCE TIMELINE (SCROLL-DRIVEN BIDIRECTIONAL SCRUB)
+      // EXACT EVENTBEDS 3-CARD ANIMATION TIMELINE
       // =========================================================================
-      // Stage 1 (0.00 -> 0.15): Single Prominent Center Phone Hold (Side phones hidden)
-      // Stage 2 (0.15 -> 0.65): Center Phone scales down as Left & Right phones emerge & fan out
-      // Stage 3 (0.65 -> 0.85): 3 Phones lock on same baseline & Labels reveal underneath
-      // Stage 4 (0.85 -> 1.00): Exit transition - Cards move up & scale down into next section
+      // Stage 1 (p: 0.00 -> 0.15): Center phone is prominent (1.18x), side phones hidden.
+      // Stage 2 (p: 0.15 -> 0.65): Left & Right phones emerge and slide outwards; Center scales to 1.0.
+      // Stage 3 (p: 0.55 -> 0.82): All 3 cards align perfectly; Labels fade in & slide up below cards.
+      // Stage 4 (p: 0.84 -> 1.00): Exit transition - Cards move up & scale down seamlessly.
       // =========================================================================
 
       var windowW = window.innerWidth || 1200;
-      var maxSpreadX = Math.min(370, windowW * 0.28);
+      var maxSpreadX = Math.min(340, windowW * 0.26);
 
-      // --- Stage 2: Fan-out progress (0.12 -> 0.65) ---
-      var fanP = Math.max(0, Math.min(1, (p - 0.12) / 0.52));
+      // --- Fan-Out Progress (0.12 -> 0.62) ---
+      var fanP = Math.max(0, Math.min(1, (p - 0.12) / 0.50));
       var fanEase = fanP < 0.5 
         ? 4 * fanP * fanP * fanP 
         : 1 - Math.pow(-2 * fanP + 2, 3) / 2;
 
-      // Spread X distance for left & right phones
       var spreadX = maxSpreadX * fanEase;
 
-      // Center phone scale: starts prominent at 1.22, settles to 1.00
-      var centerScale = 1.22 - (0.22 * fanEase);
+      // Center phone scale: starts at 1.18, settles to 1.00
+      var centerScale = 1.18 - (0.18 * fanEase);
 
-      // Side phones scale: starts small at 0.78 behind center, scales to 1.00
-      var sideScale = 0.78 + (0.22 * fanEase);
+      // Side phones scale: starts at 0.82, settles to 1.00
+      var sideScale = 0.82 + (0.18 * fanEase);
 
-      // Side phones opacity: 0 initially, reveals rapidly as they fan out
+      // Side phones opacity: 0 at start, quickly fades in as they fan out
       var sideOpacity = Math.max(0, Math.min(1, (fanP - 0.02) * 2.8));
 
       // 3D card fanning rotation
-      var leftRot = -4.5 * (1 - fanEase);
-      var rightRot = 4.5 * (1 - fanEase);
+      var leftRot = -3.5 * (1 - fanEase);
+      var rightRot = 3.5 * (1 - fanEase);
 
-      // Vertical alignment offset as cards settle
-      var baselineY = (1 - fanEase) * 15;
-
-      // --- Stage 3: Labels & Descriptions Reveal (0.60 -> 0.85) ---
-      var labelP = Math.max(0, Math.min(1, (p - 0.58) / 0.24));
+      // --- Stage 3: Labels (0.55 -> 0.82) ---
+      var labelP = Math.max(0, Math.min(1, (p - 0.55) / 0.27));
       var labelEase = labelP < 0.5 
         ? 2 * labelP * labelP 
         : -1 + (4 - 2 * labelP) * labelP;
       var textOp = labelEase;
-      var textY = (1 - labelEase) * 24;
+      var textY = (1 - labelEase) * 20;
 
-      // --- Stage 4: Exit Stage (0.85 -> 1.00) ---
+      // --- Stage 4: Exit upward lift (0.84 -> 1.00) ---
       var exitP = Math.max(0, Math.min(1, (p - 0.84) / 0.16));
       var exitEase = exitP * exitP;
-      var exitY = -48 * exitEase; // Moves cards upwards
-      var exitScale = 1.00 - (0.08 * exitEase); // Shrinks cards slightly
+      var exitY = -45 * exitEase;
+      var exitScale = 1.00 - (0.06 * exitEase);
 
-      // Apply transforms to Center Phone
+      // Center Phone Transform (always centered vertically and horizontally)
       var finalCenterScale = centerScale * exitScale;
-      var finalCenterY = baselineY + exitY;
-      centerPhone.style.transform = 'translate3d(-50%, calc(-50% + ' + finalCenterY.toFixed(2) + 'px), 0) scale(' + finalCenterScale.toFixed(3) + ')';
+      centerPhone.style.transform = 'translate3d(-50%, calc(-50% + ' + exitY.toFixed(2) + 'px), 0) scale(' + finalCenterScale.toFixed(3) + ')';
       centerPhone.style.opacity = '1';
       centerPhone.style.zIndex = '20';
 
-      // Apply transforms to Left Phone
+      // Left Phone Transform
       var finalSideScale = sideScale * exitScale;
-      var finalSideY = baselineY + exitY;
-      leftPhone.style.transform = 'translate3d(calc(-50% - ' + spreadX.toFixed(2) + 'px), calc(-50% + ' + finalSideY.toFixed(2) + 'px), 0) rotate(' + leftRot.toFixed(2) + 'deg) scale(' + finalSideScale.toFixed(3) + ')';
+      leftPhone.style.transform = 'translate3d(calc(-50% - ' + spreadX.toFixed(2) + 'px), calc(-50% + ' + exitY.toFixed(2) + 'px), 0) rotate(' + leftRot.toFixed(2) + 'deg) scale(' + finalSideScale.toFixed(3) + ')';
       leftPhone.style.opacity = sideOpacity.toFixed(3);
       leftPhone.style.pointerEvents = sideOpacity > 0.5 ? 'auto' : 'none';
 
-      // Apply transforms to Right Phone
-      rightPhone.style.transform = 'translate3d(calc(-50% + ' + spreadX.toFixed(2) + 'px), calc(-50% + ' + finalSideY.toFixed(2) + 'px), 0) rotate(' + rightRot.toFixed(2) + 'deg) scale(' + finalSideScale.toFixed(3) + ')';
+      // Right Phone Transform
+      rightPhone.style.transform = 'translate3d(calc(-50% + ' + spreadX.toFixed(2) + 'px), calc(-50% + ' + exitY.toFixed(2) + 'px), 0) rotate(' + rightRot.toFixed(2) + 'deg) scale(' + finalSideScale.toFixed(3) + ')';
       rightPhone.style.opacity = sideOpacity.toFixed(3);
       rightPhone.style.pointerEvents = sideOpacity > 0.5 ? 'auto' : 'none';
 
@@ -3384,9 +3380,9 @@ document.addEventListener('DOMContentLoaded', function() {
         dt.style.transform = 'translate3d(0, ' + textY.toFixed(1) + 'px, 0)';
       });
 
-      // Header block elevation & subtle exit fade
+      // Header block subtle exit fade
       if (headerBlock) {
-        var headerOpacity = Math.max(0, 1 - (exitP * 1.8));
+        var headerOpacity = Math.max(0, 1 - (exitP * 1.5));
         headerBlock.style.opacity = headerOpacity.toFixed(3);
       }
 
