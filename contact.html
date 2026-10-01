@@ -308,14 +308,50 @@
       gap: 6px;
     }
 
-    .service-pill-option input:checked ~ .pill-content {
-      background: #eff6ff;
-      border-color: #2563eb;
-      color: #1d4ed8;
-      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15);
+    /* Distinct Service Pill Styles (Each with its unique brand color) */
+    .service-pill-sms input:checked ~ .pill-content {
+      background: #eff6ff !important;
+      border-color: #2563eb !important;
+      color: #1d4ed8 !important;
+      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.18) !important;
     }
 
-    /* Signature EventBeds Lime Green Button Style matching User's Reference Image */
+    .service-pill-rcs input:checked ~ .pill-content {
+      background: #ecfeff !important;
+      border-color: #06b6d4 !important;
+      color: #0e7490 !important;
+      box-shadow: 0 4px 14px rgba(6, 182, 212, 0.2) !important;
+    }
+
+    .service-pill-wa input:checked ~ .pill-content {
+      background: #f0fdf4 !important;
+      border-color: #22c55e !important;
+      color: #15803d !important;
+      box-shadow: 0 4px 14px rgba(34, 197, 94, 0.2) !important;
+    }
+
+    .service-pill-voice input:checked ~ .pill-content {
+      background: #faf5ff !important;
+      border-color: #8b5cf6 !important;
+      color: #6d28d9 !important;
+      box-shadow: 0 4px 14px rgba(139, 92, 246, 0.2) !important;
+    }
+
+    .service-pill-ivr input:checked ~ .pill-content {
+      background: #fff7ed !important;
+      border-color: #f97316 !important;
+      color: #c2410c !important;
+      box-shadow: 0 4px 14px rgba(249, 115, 22, 0.2) !important;
+    }
+
+    .service-pill-cpaas input:checked ~ .pill-content {
+      background: #eef2ff !important;
+      border-color: #6366f1 !important;
+      color: #4338ca !important;
+      box-shadow: 0 4px 14px rgba(99, 102, 241, 0.2) !important;
+    }
+
+    /* Signature Black Button Style (Exact Match with 1st Image [Get started]) */
     .eventbeds-submit-btn,
     .whatsapp-action-btn,
     .menu-black-button.desktop,
@@ -323,12 +359,12 @@
     .primary-button,
     .secondary-button.submit,
     #closeModalButton {
-      background: #cfe16f !important;
-      color: #000000 !important;
+      background: #000000 !important;
+      color: #ffffff !important;
       font-family: 'Plus Jakarta Sans', -apple-system, sans-serif !important;
       border: none !important;
       border-radius: 14px !important;
-      padding: 15px 28px !important;
+      padding: 16px 28px !important;
       font-size: 16px !important;
       font-weight: 700 !important;
       letter-spacing: -0.01em !important;
@@ -337,7 +373,7 @@
       align-items: center !important;
       justify-content: center !important;
       gap: 10px !important;
-      box-shadow: 0 6px 18px rgba(207, 225, 111, 0.35) !important;
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.2) !important;
       transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1) !important;
       text-decoration: none !important;
       box-sizing: border-box !important;
@@ -350,14 +386,14 @@
     .primary-button:hover,
     .secondary-button.submit:hover,
     #closeModalButton:hover {
-      background: #bdd252 !important;
-      color: #000000 !important;
+      background: #1e293b !important;
+      color: #ffffff !important;
       transform: translateY(-2px) !important;
-      box-shadow: 0 10px 24px rgba(207, 225, 111, 0.5) !important;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.3) !important;
     }
 
     .menu-button-text, .button-text, .button-text.hover, .menu-button-text.hover {
-      color: #000000 !important;
+      color: #ffffff !important;
       font-weight: 700 !important;
       font-family: 'Plus Jakarta Sans', sans-serif !important;
     }
@@ -811,27 +847,27 @@
           <div class="form-field-item">
             <label class="form-field-label">Services Required</label>
             <div class="services-choice-grid">
-              <label class="service-pill-option">
+              <label class="service-pill-option service-pill-sms">
                 <input type="checkbox" name="services" value="Bulk SMS" checked />
                 <div class="pill-content">💬 Bulk SMS</div>
               </label>
-              <label class="service-pill-option">
+              <label class="service-pill-option service-pill-rcs">
                 <input type="checkbox" name="services" value="RCS Messaging" checked />
                 <div class="pill-content">🗨️ RCS Messaging</div>
               </label>
-              <label class="service-pill-option">
+              <label class="service-pill-option service-pill-wa">
                 <input type="checkbox" name="services" value="WhatsApp API" checked />
                 <div class="pill-content">📱 WhatsApp API</div>
               </label>
-              <label class="service-pill-option">
+              <label class="service-pill-option service-pill-voice">
                 <input type="checkbox" name="services" value="Voice & OBD" />
                 <div class="pill-content">📞 Voice &amp; OBD</div>
               </label>
-              <label class="service-pill-option">
+              <label class="service-pill-option service-pill-ivr">
                 <input type="checkbox" name="services" value="IVR Solutions" />
                 <div class="pill-content">📊 IVR System</div>
               </label>
-              <label class="service-pill-option">
+              <label class="service-pill-option service-pill-cpaas">
                 <input type="checkbox" name="services" value="Enterprise CPaaS" />
                 <div class="pill-content">⚡ CPaaS API</div>
               </label>
