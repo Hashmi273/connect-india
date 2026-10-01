@@ -1017,9 +1017,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   }
   .discovery-mobile {
     position: absolute !important;
-    top: 50% !important;
+    top: 46% !important;
     left: 50% !important;
-    width: clamp(320px, 27vw, 400px) !important;
+    width: clamp(280px, 24vw, 360px) !important;
     height: auto !important;
     display: flex !important;
     flex-direction: column !important;
@@ -1039,10 +1039,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   }
   .discovery-mobile .image {
     width: 100% !important;
-    height: clamp(400px, 54vh, 560px) !important;
+    height: clamp(340px, 46vh, 480px) !important;
     object-fit: contain !important;
-    filter: drop-shadow(0 25px 55px rgba(0, 0, 0, 0.95)) !important;
-    border-radius: 46px !important;
+    filter: drop-shadow(0 20px 45px rgba(0, 0, 0, 0.95)) !important;
+    border-radius: 42px !important;
     image-rendering: -webkit-optimize-contrast !important;
     transition: filter 0.35s ease !important;
     display: block !important;
@@ -1052,24 +1052,24 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   }
   .down-position-block {
     position: relative !important;
-    margin-top: 18px !important;
+    margin-top: 14px !important;
     text-align: center !important;
     width: 100% !important;
-    max-width: 340px !important;
+    max-width: 320px !important;
     padding: 0 8px !important;
     will-change: opacity, transform !important;
   }
   .down-text-block .heading-h4 {
-    font-size: 25px !important;
+    font-size: 22px !important;
     font-weight: 800 !important;
     color: #ffffff !important;
-    margin: 0 0 6px !important;
+    margin: 0 0 4px !important;
     letter-spacing: -0.01em !important;
     text-align: center !important;
   }
   .down-text-block .body-s.grey {
-    font-size: 14.5px !important;
-    line-height: 1.55 !important;
+    font-size: 13.5px !important;
+    line-height: 1.5 !important;
     color: #cbd5e1 !important;
     margin: 0 !important;
     text-align: center !important;
@@ -3316,21 +3316,21 @@ document.addEventListener('DOMContentLoaded', function() {
       var currentY = (1 - ease) * startY;
 
       // Symmetric horizontal spread distance based on screen width
-      var maxSpreadX = Math.min(410, window.innerWidth * 0.30);
-      var startSpreadX = 70; // tucked behind center
+      var maxSpreadX = Math.min(380, window.innerWidth * 0.28);
+      var startSpreadX = 60; // tucked behind center
       
       var spreadDist = startSpreadX + (maxSpreadX - startSpreadX) * ease;
       var leftX = -spreadDist;
       var rightX = spreadDist;
 
-      // Center phone scale: starts prominent at 1.18, settles to 1.06
-      var centerScale = 1.18 - (0.12 * ease);
-      // Side phones scale: starts at 0.94, settles to 1.04
-      var sideScale = 0.94 + (0.10 * ease);
+      // Center phone scale: starts prominent at 1.12, settles to 1.0
+      var centerScale = 1.12 - (0.12 * ease);
+      // Side phones scale: starts at 0.90, settles to 1.0
+      var sideScale = 0.90 + (0.10 * ease);
 
       // 3D rotations for realistic card fanning
-      var leftRot = (-3.5 * (1 - ease)) + (-0.5 * ease);
-      var rightRot = (3.5 * (1 - ease)) + (0.5 * ease);
+      var leftRot = (-3.0 * (1 - ease)) + (-0.5 * ease);
+      var rightRot = (3.0 * (1 - ease)) + (0.5 * ease);
 
       leftPhone.style.transform = 'translate3d(calc(-50% + ' + leftX.toFixed(2) + 'px), calc(-50% + ' + currentY.toFixed(2) + 'px), 0) rotate(' + leftRot.toFixed(2) + 'deg) scale(' + sideScale.toFixed(3) + ')';
       leftPhone.style.opacity = '1';
