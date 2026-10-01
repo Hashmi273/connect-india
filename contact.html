@@ -307,30 +307,51 @@
       box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15);
     }
 
-    /* EventBeds Signature Black Pill Submit Button */
-    .eventbeds-submit-btn {
-      width: 100%;
-      background: #000000 !important;
-      color: #ffffff !important;
+    /* Signature EventBeds Lime Green Button Style matching User's Reference Image */
+    .eventbeds-submit-btn,
+    .whatsapp-action-btn,
+    .menu-black-button.desktop,
+    .menu-black-button.mobile,
+    .primary-button,
+    .secondary-button.submit,
+    #closeModalButton {
+      background: #cfe16f !important;
+      color: #000000 !important;
+      font-family: 'Plus Jakarta Sans', -apple-system, sans-serif !important;
       border: none !important;
-      border-radius: 9999px !important;
-      padding: 16px 28px !important;
+      border-radius: 14px !important;
+      padding: 15px 28px !important;
       font-size: 16px !important;
       font-weight: 700 !important;
+      letter-spacing: -0.01em !important;
       cursor: pointer !important;
       display: flex !important;
       align-items: center !important;
       justify-content: center !important;
       gap: 10px !important;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15) !important;
-      transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1) !important;
-      margin-top: 10px;
+      box-shadow: 0 6px 18px rgba(207, 225, 111, 0.35) !important;
+      transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1) !important;
+      text-decoration: none !important;
+      box-sizing: border-box !important;
     }
 
-    .eventbeds-submit-btn:hover {
-      background: #1e293b !important;
-      transform: translateY(-2px);
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25) !important;
+    .eventbeds-submit-btn:hover,
+    .whatsapp-action-btn:hover,
+    .menu-black-button.desktop:hover,
+    .menu-black-button.mobile:hover,
+    .primary-button:hover,
+    .secondary-button.submit:hover,
+    #closeModalButton:hover {
+      background: #bdd252 !important;
+      color: #000000 !important;
+      transform: translateY(-2px) !important;
+      box-shadow: 0 10px 24px rgba(207, 225, 111, 0.5) !important;
+    }
+
+    .menu-button-text, .button-text, .button-text.hover, .menu-button-text.hover {
+      color: #000000 !important;
+      font-weight: 700 !important;
+      font-family: 'Plus Jakarta Sans', sans-serif !important;
     }
 
     /* Right Column: EventBeds White Cards */
@@ -421,32 +442,6 @@
       font-size: 13px;
       color: #64748b;
       margin-top: 3px;
-    }
-
-    /* WhatsApp Direct Action Button */
-    .whatsapp-action-btn {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      width: 100%;
-      background: #25d366;
-      color: #ffffff;
-      font-weight: 700;
-      font-size: 15px;
-      padding: 14px 20px;
-      border-radius: 9999px;
-      text-decoration: none;
-      margin-top: 16px;
-      box-shadow: 0 8px 20px rgba(37, 211, 102, 0.28);
-      transition: all 0.25s ease;
-      box-sizing: border-box;
-    }
-
-    .whatsapp-action-btn:hover {
-      background: #20ba5a;
-      transform: translateY(-2px);
-      box-shadow: 0 12px 28px rgba(37, 211, 102, 0.4);
     }
 
     /* SLA Metric Badges */
