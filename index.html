@@ -2040,8 +2040,13 @@ img {
     <div class="city-scene-wrapper">
       <div class="city-bg-container">
         <picture>
+          <!-- Mobile (Portrait) -->
           <source media="(max-width: 991px)" srcset="images/hero-city-mobile.jpg">
+          <!-- Tablet (Up to 1536px) -->
+          <source media="(max-width: 1536px)" srcset="images/hero-city-tablet.jpg">
+          <!-- Large Desktop (2560px+) -->
           <source media="(min-width: 1921px)" srcset="images/hero-city-large.jpg">
+          <!-- Standard Desktop (1920px) -->
           <img src="images/hero-city-desktop.jpg" loading="eager" alt="OMINI 3D City" class="city-illustration-img"/>
         </picture>
       </div>
