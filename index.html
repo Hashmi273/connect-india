@@ -931,7 +931,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     position: relative !important;
     z-index: 25 !important;
     background-color: #000000 !important;
-    height: 220vh !important;
+    height: 320vh !important;
     padding: 0 !important;
     margin: 0 !important;
   }
@@ -1017,9 +1017,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   }
   .discovery-mobile {
     position: absolute !important;
-    top: 46% !important;
+    top: 42% !important;
     left: 50% !important;
-    width: clamp(280px, 24vw, 360px) !important;
+    width: clamp(270px, 23vw, 340px) !important;
     height: auto !important;
     display: flex !important;
     flex-direction: column !important;
@@ -1039,7 +1039,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   }
   .discovery-mobile .image {
     width: 100% !important;
-    height: clamp(340px, 46vh, 480px) !important;
+    height: clamp(330px, 45vh, 470px) !important;
     object-fit: contain !important;
     filter: drop-shadow(0 20px 45px rgba(0, 0, 0, 0.95)) !important;
     border-radius: 42px !important;
@@ -1052,24 +1052,24 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   }
   .down-position-block {
     position: relative !important;
-    margin-top: 14px !important;
+    margin-top: 12px !important;
     text-align: center !important;
     width: 100% !important;
-    max-width: 320px !important;
-    padding: 0 8px !important;
+    max-width: 300px !important;
+    padding: 0 6px !important;
     will-change: opacity, transform !important;
   }
   .down-text-block .heading-h4 {
-    font-size: 22px !important;
+    font-size: 21px !important;
     font-weight: 800 !important;
     color: #ffffff !important;
-    margin: 0 0 4px !important;
+    margin: 0 0 3px !important;
     letter-spacing: -0.01em !important;
     text-align: center !important;
   }
   .down-text-block .body-s.grey {
-    font-size: 13.5px !important;
-    line-height: 1.5 !important;
+    font-size: 13px !important;
+    line-height: 1.45 !important;
     color: #cbd5e1 !important;
     margin: 0 !important;
     text-align: center !important;
@@ -3296,15 +3296,15 @@ document.addEventListener('DOMContentLoaded', function() {
       }
       var diff = targetP - currentP;
       if (Math.abs(diff) > 0.0002) {
-        currentP += diff * 0.16;
+        currentP += diff * 0.10;
       } else {
         currentP = targetP;
       }
 
       var p = currentP;
 
-      // EventBeds Animation Mapping: Progress 0.0 -> 0.70 is the primary active timeline
-      var timelineP = Math.min(1, p / 0.70);
+      // EventBeds Animation Mapping: Progress 0.0 -> 0.80 provides slower, elegant pacing
+      var timelineP = Math.min(1, p / 0.80);
       // Smooth cubic bezier easing
       var ease = timelineP < 0.5 
         ? 4 * timelineP * timelineP * timelineP 
@@ -3316,17 +3316,17 @@ document.addEventListener('DOMContentLoaded', function() {
       var currentY = (1 - ease) * startY;
 
       // Symmetric horizontal spread distance based on screen width
-      var maxSpreadX = Math.min(380, window.innerWidth * 0.28);
-      var startSpreadX = 60; // tucked behind center
+      var maxSpreadX = Math.min(350, window.innerWidth * 0.26);
+      var startSpreadX = 50; // tucked behind center
       
       var spreadDist = startSpreadX + (maxSpreadX - startSpreadX) * ease;
       var leftX = -spreadDist;
       var rightX = spreadDist;
 
-      // Center phone scale: starts prominent at 1.12, settles to 1.0
-      var centerScale = 1.12 - (0.12 * ease);
-      // Side phones scale: starts at 0.90, settles to 1.0
-      var sideScale = 0.90 + (0.10 * ease);
+      // Center phone scale: starts prominent at 1.10, settles to 1.0
+      var centerScale = 1.10 - (0.10 * ease);
+      // Side phones scale: starts at 0.90, settles to 0.98
+      var sideScale = 0.90 + (0.08 * ease);
 
       // 3D rotations for realistic card fanning
       var leftRot = (-3.0 * (1 - ease)) + (-0.5 * ease);
