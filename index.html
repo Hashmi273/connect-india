@@ -836,7 +836,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     position: relative !important;
     z-index: 25 !important;
     background-color: #000000 !important;
-    height: 220vh !important;
+    height: 180vh !important;
     padding: 0 !important;
     margin: 0 !important;
   }
@@ -875,20 +875,20 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .discovery-content {
     width: 100% !important;
     height: 100vh !important;
-    max-width: 1360px !important;
+    max-width: 1280px !important;
     margin: 0 auto !important;
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
     justify-content: center !important;
     position: relative !important;
-    padding: 20px !important;
+    padding: 15px !important;
     box-sizing: border-box !important;
   }
   .discover-header-block {
     text-align: center !important;
     position: absolute !important;
-    top: clamp(20px, 4vh, 40px) !important;
+    top: clamp(15px, 3vh, 30px) !important;
     left: 50% !important;
     transform: translateX(-50%) !important;
     z-index: 30 !important;
@@ -896,14 +896,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     will-change: transform, opacity !important;
   }
   .discover-header-block .body-m.grey {
-    font-size: 14px !important;
+    font-size: 13px !important;
     letter-spacing: 0.1em !important;
     text-transform: uppercase !important;
     color: #64748b !important;
-    margin-bottom: 4px !important;
+    margin-bottom: 2px !important;
   }
   .discover-header-block .heading-h1.white {
-    font-size: clamp(30px, 3.8vw, 46px) !important;
+    font-size: clamp(26px, 3.2vw, 42px) !important;
     font-weight: 900 !important;
     letter-spacing: -0.02em !important;
     color: #ffffff !important;
@@ -915,14 +915,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     justify-content: center !important;
     position: relative !important;
     width: 100% !important;
-    height: clamp(480px, 62vh, 560px) !important;
-    margin-top: 30px !important;
+    height: clamp(380px, 52vh, 460px) !important;
+    margin-top: 40px !important;
   }
   .discovery-mobile {
     position: absolute !important;
     top: 50% !important;
     left: 50% !important;
-    width: clamp(240px, 20vw, 300px) !important;
+    width: clamp(210px, 17vw, 260px) !important;
     height: auto !important;
     display: flex !important;
     flex-direction: column !important;
@@ -942,33 +942,33 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   }
   .discovery-mobile .image {
     width: 100% !important;
-    height: clamp(300px, 42vh, 400px) !important;
+    height: clamp(240px, 34vh, 320px) !important;
     object-fit: contain !important;
-    filter: drop-shadow(0 20px 45px rgba(0, 0, 0, 0.95)) !important;
-    border-radius: 36px !important;
+    filter: drop-shadow(0 15px 35px rgba(0, 0, 0, 0.95)) !important;
+    border-radius: 32px !important;
     image-rendering: -webkit-optimize-contrast !important;
     transition: filter 0.35s ease !important;
     display: block !important;
   }
   .discovery-mobile:hover .image {
-    filter: drop-shadow(0 25px 50px rgba(59, 130, 246, 0.4)) drop-shadow(0 15px 35px rgba(0, 0, 0, 0.95)) !important;
+    filter: drop-shadow(0 20px 40px rgba(59, 130, 246, 0.4)) drop-shadow(0 10px 25px rgba(0, 0, 0, 0.95)) !important;
   }
   .down-position-block {
     position: relative !important;
-    margin-top: 12px !important;
+    margin-top: 10px !important;
     text-align: center !important;
     width: 100% !important;
-    max-width: 280px !important;
+    max-width: 240px !important;
     will-change: opacity, transform !important;
   }
   .down-text-block .heading-h4 {
-    font-size: 19px !important;
+    font-size: 17px !important;
     font-weight: 800 !important;
     color: #ffffff !important;
-    margin: 0 0 3px !important;
+    margin: 0 0 2px !important;
   }
   .down-text-block .body-s.grey {
-    font-size: 12.5px !important;
+    font-size: 12px !important;
     line-height: 1.35 !important;
     color: #94a3b8 !important;
     margin: 0 !important;
@@ -3206,12 +3206,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
       // Vertical translation (subtle initial elevation that keeps phone + description visible)
       var windowH = window.innerHeight || 800;
-      var startY = Math.min(80, windowH * 0.10);
+      var startY = Math.min(60, windowH * 0.08);
       var currentY = (1 - ease) * startY;
 
       // Horizontal spread distance based on screen width
-      var maxSpreadX = Math.min(390, window.innerWidth * 0.285);
-      var startSpreadX = 65; // tucked behind in EventBeds
+      var maxSpreadX = Math.min(350, window.innerWidth * 0.26);
+      var startSpreadX = 55; // tucked behind in EventBeds
       
       var leftX = - (startSpreadX + (maxSpreadX - startSpreadX) * ease);
       var rightX = startSpreadX + (maxSpreadX - startSpreadX) * ease;
@@ -3225,26 +3225,26 @@ document.addEventListener('DOMContentLoaded', function() {
       var leftRot = (-3.5 * (1 - ease)) + (-0.5 * ease);
       var rightRot = (3.5 * (1 - ease)) + (0.5 * ease);
 
-      leftPhone.style.transform = 'translate3d(calc(-50% + ' + leftX.toFixed(2) + 'px), calc(-50% + ' + (currentY + 6).toFixed(2) + 'px), 0) rotate(' + leftRot.toFixed(2) + 'deg) scale(' + sideScale.toFixed(3) + ')';
+      leftPhone.style.transform = 'translate3d(calc(-50% + ' + leftX.toFixed(2) + 'px), calc(-50% + ' + (currentY + 4).toFixed(2) + 'px), 0) rotate(' + leftRot.toFixed(2) + 'deg) scale(' + sideScale.toFixed(3) + ')';
       leftPhone.style.opacity = '1';
 
-      rightPhone.style.transform = 'translate3d(calc(-50% + ' + rightX.toFixed(2) + 'px), calc(-50% + ' + (currentY + 6).toFixed(2) + 'px), 0) rotate(' + rightRot.toFixed(2) + 'deg) scale(' + sideScale.toFixed(3) + ')';
+      rightPhone.style.transform = 'translate3d(calc(-50% + ' + rightX.toFixed(2) + 'px), calc(-50% + ' + (currentY + 4).toFixed(2) + 'px), 0) rotate(' + rightRot.toFixed(2) + 'deg) scale(' + sideScale.toFixed(3) + ')';
       rightPhone.style.opacity = '1';
 
       centerPhone.style.transform = 'translate3d(-50%, calc(-50% + ' + currentY.toFixed(2) + 'px), 0) scale(' + centerScale.toFixed(3) + ')';
       centerPhone.style.opacity = '1';
 
-      // Header block animation (scale 1.25 -> 1.0)
+      // Header block animation (scale 1.20 -> 1.0)
       if (headerBlock) {
-        var headerScale = 1.25 - (0.25 * ease);
-        var headerY = (1 - ease) * 10;
+        var headerScale = 1.20 - (0.20 * ease);
+        var headerY = (1 - ease) * 8;
         headerBlock.style.transform = 'translateX(-50%) translate3d(0, ' + headerY.toFixed(1) + 'px, 0) scale(' + headerScale.toFixed(3) + ')';
       }
 
       // Text Descriptions Phase: Smoothly fade in and slide up as cards fan out
-      var textProgress = Math.max(0, Math.min(1, (timelineP - 0.15) / 0.60));
-      var textOp = 0.2 + (0.8 * textProgress);
-      var textY = (1 - textProgress) * 12;
+      var textProgress = Math.max(0, Math.min(1, (timelineP - 0.10) / 0.50));
+      var textOp = 0.3 + (0.7 * textProgress);
+      var textY = (1 - textProgress) * 10;
 
       downTexts.forEach(function(dt) {
         dt.style.opacity = textOp.toFixed(2);
