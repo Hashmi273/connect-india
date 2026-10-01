@@ -1017,9 +1017,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   }
   .discovery-mobile {
     position: absolute !important;
-    top: 42% !important;
+    top: 48% !important;
     left: 50% !important;
-    width: clamp(270px, 23vw, 340px) !important;
+    width: clamp(290px, 25vw, 360px) !important;
     height: auto !important;
     display: flex !important;
     flex-direction: column !important;
@@ -1039,7 +1039,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   }
   .discovery-mobile .image {
     width: 100% !important;
-    height: clamp(330px, 45vh, 470px) !important;
+    height: clamp(360px, 48vh, 510px) !important;
     object-fit: contain !important;
     filter: drop-shadow(0 20px 45px rgba(0, 0, 0, 0.95)) !important;
     border-radius: 42px !important;
@@ -1052,23 +1052,23 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   }
   .down-position-block {
     position: relative !important;
-    margin-top: 12px !important;
+    margin-top: 14px !important;
     text-align: center !important;
     width: 100% !important;
-    max-width: 300px !important;
-    padding: 0 6px !important;
+    max-width: 320px !important;
+    padding: 0 8px !important;
     will-change: opacity, transform !important;
   }
   .down-text-block .heading-h4 {
-    font-size: 21px !important;
+    font-size: 22px !important;
     font-weight: 800 !important;
     color: #ffffff !important;
-    margin: 0 0 3px !important;
+    margin: 0 0 4px !important;
     letter-spacing: -0.01em !important;
     text-align: center !important;
   }
   .down-text-block .body-s.grey {
-    font-size: 13px !important;
+    font-size: 13.5px !important;
     line-height: 1.45 !important;
     color: #cbd5e1 !important;
     margin: 0 !important;
@@ -3288,8 +3288,10 @@ document.addEventListener('DOMContentLoaded', function() {
       var totalScrollable = rect.height - windowH;
       if (totalScrollable <= 0) totalScrollable = 1;
       
-      var scrolled = -rect.top;
-      var p = scrolled / totalScrollable;
+      // Anticipate slightly (-rect.top + windowH * 0.15) so as soon as user approaches the section,
+      // the cards are already responsive and opening smoothly rather than lagging behind!
+      var scrolled = -rect.top + (windowH * 0.10);
+      var p = scrolled / (totalScrollable + windowH * 0.10);
       targetP = Math.max(0, Math.min(1, p));
 
       if (!isRunning) {
@@ -3305,68 +3307,77 @@ document.addEventListener('DOMContentLoaded', function() {
       }
       var diff = targetP - currentP;
       if (Math.abs(diff) > 0.0002) {
-        currentP += diff * 0.12;
+        currentP += diff * 0.14;
       } else {
         currentP = targetP;
       }
 
       var p = currentP;
 
-      // EventBeds Animation Mapping: Progress 0.0 -> 0.75 active timeline
-      var timelineP = Math.min(1, p / 0.75);
-      // Smooth cubic bezier easing
-      var ease = timelineP < 0.5 
-        ? 4 * timelineP * timelineP * timelineP 
-        : 1 - Math.pow(-2 * timelineP + 2, 3) / 2;
-
-      // Vertical translation (subtle initial elevation)
-      var windowH = window.innerHeight || 800;
-      var startY = Math.min(40, windowH * 0.05);
-      var currentY = (1 - ease) * startY;
+      // EventBeds Choreography:
+      // Phase 1 (0.0 -> 0.28): Early and dramatic fan-out so cards open immediately on scroll
+      // Phase 2 (0.28 -> 0.82): Full screen-fit 3-card frame held open for comfortable reading
+      // Phase 3 (0.82 -> 1.00): Smooth transition into next telecom infrastructure section
+      var fanEnd = 0.28;
+      var holdEnd = 0.82;
+      
+      var fanRaw = Math.min(1, Math.max(0, p / fanEnd));
+      // Ease out cubic for fanRaw so cards open quickly and smoothly
+      var fanEase = 1 - Math.pow(1 - fanRaw, 3);
 
       // Symmetric horizontal spread distance based on screen width
-      var maxSpreadX = Math.min(365, Math.max(290, window.innerWidth * 0.27));
-      var startSpreadX = 50; // tucked behind center
+      // Reaching optimal wide screen-fit identical to EventBeds desktop reference
+      var maxSpreadX = Math.min(390, Math.max(320, window.innerWidth * 0.285));
+      var startSpreadX = 25; // subtly tucked behind center phone initially
       
-      var spreadDist = startSpreadX + (maxSpreadX - startSpreadX) * ease;
+      var spreadDist = startSpreadX + (maxSpreadX - startSpreadX) * fanEase;
       var leftX = -spreadDist;
       var rightX = spreadDist;
 
-      // Center phone scale: starts prominent at 1.10, settles to 1.0
-      var centerScale = 1.10 - (0.10 * ease);
-      // Side phones scale: starts at 0.90, settles to 0.98
-      var sideScale = 0.90 + (0.08 * ease);
+      // Vertical translation (cards rise into view gracefully)
+      var currentY = (1 - fanEase) * 30;
+
+      // Exit transition when scrolling past holdEnd
+      var exitRaw = p > holdEnd ? Math.min(1, (p - holdEnd) / (1 - holdEnd)) : 0;
+      var exitEase = exitRaw * exitRaw;
+      var exitOffsetY = -exitEase * 60;
+      var exitOpacity = Math.max(0, 1 - (exitRaw * 1.5));
+
+      // Center phone scale: starts at 1.08, settles to 1.00
+      var centerScale = (1.08 - (0.08 * fanEase)) * (1 - 0.05 * exitEase);
+      // Side phones scale: starts at 0.90, settles to 0.98 in full frame
+      var sideScale = (0.90 + (0.08 * fanEase)) * (1 - 0.05 * exitEase);
 
       // 3D rotations for realistic card fanning
-      var leftRot = (-3.0 * (1 - ease)) + (-0.5 * ease);
-      var rightRot = (3.0 * (1 - ease)) + (0.5 * ease);
+      var leftRot = (-3.0 * (1 - fanEase)) + (-0.5 * fanEase);
+      var rightRot = (3.0 * (1 - fanEase)) + (0.5 * fanEase);
 
       // Set styles with !important so Webflow cannot freeze or override them
-      leftPhone.style.setProperty('transform', 'translate3d(calc(-50% + ' + leftX.toFixed(2) + 'px), calc(-50% + ' + currentY.toFixed(2) + 'px), 0) rotate(' + leftRot.toFixed(2) + 'deg) scale(' + sideScale.toFixed(3) + ')', 'important');
-      leftPhone.style.setProperty('opacity', '1', 'important');
+      leftPhone.style.setProperty('transform', 'translate3d(calc(-50% + ' + leftX.toFixed(2) + 'px), calc(-50% + ' + (currentY + exitOffsetY).toFixed(2) + 'px), 0) rotate(' + leftRot.toFixed(2) + 'deg) scale(' + sideScale.toFixed(3) + ')', 'important');
+      leftPhone.style.setProperty('opacity', exitOpacity.toFixed(2), 'important');
       leftPhone.style.setProperty('display', 'flex', 'important');
 
-      rightPhone.style.setProperty('transform', 'translate3d(calc(-50% + ' + rightX.toFixed(2) + 'px), calc(-50% + ' + currentY.toFixed(2) + 'px), 0) rotate(' + rightRot.toFixed(2) + 'deg) scale(' + sideScale.toFixed(3) + ')', 'important');
-      rightPhone.style.setProperty('opacity', '1', 'important');
+      rightPhone.style.setProperty('transform', 'translate3d(calc(-50% + ' + rightX.toFixed(2) + 'px), calc(-50% + ' + (currentY + exitOffsetY).toFixed(2) + 'px), 0) rotate(' + rightRot.toFixed(2) + 'deg) scale(' + sideScale.toFixed(3) + ')', 'important');
+      rightPhone.style.setProperty('opacity', exitOpacity.toFixed(2), 'important');
       rightPhone.style.setProperty('display', 'flex', 'important');
 
-      centerPhone.style.setProperty('transform', 'translate3d(-50%, calc(-50% + ' + currentY.toFixed(2) + 'px), 0) scale(' + centerScale.toFixed(3) + ')', 'important');
-      centerPhone.style.setProperty('opacity', '1', 'important');
+      centerPhone.style.setProperty('transform', 'translate3d(-50%, calc(-50% + ' + (currentY + exitOffsetY).toFixed(2) + 'px), 0) scale(' + centerScale.toFixed(3) + ')', 'important');
+      centerPhone.style.setProperty('opacity', exitOpacity.toFixed(2), 'important');
       centerPhone.style.setProperty('display', 'flex', 'important');
 
       // Header block animation
       if (headerBlock) {
-        var headerOpacity = Math.max(0, 1 - (timelineP * 1.5));
-        var headerScale = 1.20 - (0.20 * ease);
-        var headerY = (1 - ease) * 8;
-        headerBlock.style.setProperty('opacity', headerOpacity.toFixed(2), 'important');
+        var headerOpacity = Math.max(0, 1 - (fanRaw * 1.8));
+        var headerScale = 1.15 - (0.15 * fanEase);
+        var headerY = (1 - fanEase) * 8;
+        headerBlock.style.setProperty('opacity', (headerOpacity * exitOpacity).toFixed(2), 'important');
         headerBlock.style.setProperty('transform', 'translateX(-50%) translate3d(0, ' + headerY.toFixed(1) + 'px, 0) scale(' + headerScale.toFixed(3) + ')', 'important');
       }
 
-      // Text Descriptions Phase: Smoothly fade in and slide up
-      var textProgress = Math.max(0, Math.min(1, (timelineP - 0.10) / 0.50));
-      var textOp = 0.35 + (0.65 * textProgress);
-      var textY = (1 - textProgress) * 10;
+      // Text Descriptions Phase: Smoothly fade in and lock in as cards fan out
+      var textProgress = Math.max(0, Math.min(1, (fanRaw - 0.05) / 0.65));
+      var textOp = (0.20 + (0.80 * textProgress)) * exitOpacity;
+      var textY = (1 - textProgress) * 12;
 
       for (var k = 0; k < downTexts.length; k++) {
         downTexts[k].style.setProperty('opacity', textOp.toFixed(2), 'important');
