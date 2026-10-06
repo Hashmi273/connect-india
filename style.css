@@ -1,0 +1,1226 @@
+/* ==========================================================================
+   CONNECT INDIA — EXACT EVENTBEDS.COM REPLICA DESIGN SYSTEM
+   Editorial Minimalism · Floating City Pins · Dark Luxury Blocks · Tricolor
+   ========================================================================== */
+
+:root {
+    /* EventBeds Colors */
+    --eb-black: #000000;
+    --eb-dark-bg: #0B0E14;
+    --eb-dark-surface: #141A23;
+    --eb-dark-card: #1C2430;
+    --eb-dark-border: rgba(255, 255, 255, 0.09);
+    
+    --eb-white: #FFFFFF;
+    --eb-light-bg: #F5F7FA;
+    --eb-light-surface: #FFFFFF;
+    --eb-light-border: #E5E9F0;
+    
+    --eb-grey-text: #64748B;
+    --eb-muted-text: #94A3B8;
+    
+    /* Connect India Tricolor Accents */
+    --saffron: #FF9933;
+    --saffron-hover: #E8831D;
+    --green: #10B981;
+    --green-dark: #059669;
+
+    /* Channel Theme Colors */
+    --ch-sms: #3B82F6;
+    --ch-rcs: #FF7700;
+    --ch-wa: #25D366;
+    --ch-obd: #A855F7;
+    --ch-ivr: #EC4899;
+
+    /* Typography */
+    --font-main: 'Plus Jakarta Sans', -apple-system, sans-serif;
+    --font-heading: 'Syne', 'Plus Jakarta Sans', sans-serif;
+
+    /* Radii */
+    --radius-pill: 9999px;
+    --radius-card: 24px;
+    --radius-phone: 36px;
+    --radius-sm: 8px;
+
+    /* Shadows matching EventBeds */
+    --shadow-pin: 0px 6px 22px rgba(0, 0, 0, 0.12);
+    --shadow-card: 0px 10px 32px rgba(0, 0, 0, 0.08);
+    --shadow-dark-card: 0px 20px 50px rgba(0, 0, 0, 0.4);
+}
+
+/* ==========================================================================
+   RESET & GLOBAL
+   ========================================================================== */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+}
+
+body.eb-page-body {
+    font-family: var(--font-main);
+    background-color: var(--eb-light-bg);
+    color: #1E293B;
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul {
+    list-style: none;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+.eb-container-1280 {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+.eb-container-full {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+.text-saffron { color: var(--saffron); }
+.text-green { color: var(--green); }
+
+/* ==========================================================================
+   EVENTBEDS BUTTONS (Interactive Dual-Flip Animation)
+   ========================================================================== */
+.eb-btn-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-pill);
+    padding: 14px 28px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.eb-btn-primary {
+    background: var(--saffron);
+    color: #000000;
+}
+
+.eb-btn-primary:hover {
+    background: var(--saffron-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(255, 153, 51, 0.35);
+}
+
+.eb-btn-black {
+    background: #000000;
+    color: #FFFFFF;
+}
+
+.eb-btn-black:hover {
+    background: #1E293B;
+    transform: translateY(-2px);
+}
+
+.eb-btn-outline {
+    background: transparent;
+    border-color: #CBD5E1;
+    color: #0F172A;
+}
+
+.eb-btn-outline:hover {
+    border-color: #000000;
+    color: #000000;
+    transform: translateY(-2px);
+}
+
+.eb-btn-pill.full-width {
+    width: 100%;
+}
+
+.btn-flip-wrapper {
+    position: relative;
+    display: block;
+}
+
+/* ==========================================================================
+   EVENTBEDS TOP NAV
+   ========================================================================== */
+.eb-top-nav {
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background: rgba(245, 247, 250, 0.9);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--eb-light-border);
+    transition: all 0.3s ease;
+}
+
+.eb-nav-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 32px;
+    height: 76px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.eb-brand-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.eb-logo-symbol {
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+}
+
+.eb-brand-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.eb-brand-name {
+    font-family: var(--font-heading);
+    font-size: 20px;
+    font-weight: 800;
+    color: #000000;
+    line-height: 1;
+}
+
+.eb-brand-saffron {
+    color: var(--saffron);
+}
+
+.eb-brand-badge {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--eb-grey-text);
+}
+
+.eb-nav-menu {
+    display: flex;
+    align-items: center;
+    gap: 36px;
+}
+
+.eb-nav-item {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--eb-grey-text);
+    transition: color 0.2s ease;
+}
+
+.eb-nav-item:hover, .eb-nav-item.active {
+    color: #000000;
+}
+
+.eb-nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.eb-menu-hamburger {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: var(--font-main);
+    font-weight: 700;
+    font-size: 14px;
+}
+
+/* ==========================================================================
+   1. EVENTBEDS HERO SECTION (Floating Pin Diorama & Mega Heading)
+   ========================================================================== */
+.eb-hero-section {
+    position: relative;
+    min-height: 85vh;
+    padding: 60px 0 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+    background: var(--eb-light-bg);
+}
+
+/* EventBeds Floating Pins */
+.eb-pins-overlay {
+    position: absolute;
+    inset: 0;
+    max-width: 1300px;
+    margin: 0 auto;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.eb-pin-item {
+    position: absolute;
+    pointer-events: auto;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.eb-pin-pill {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    padding: 8px 16px 8px 10px;
+    border-radius: var(--radius-pill);
+    box-shadow: var(--shadow-pin);
+    transition: all 0.3s ease;
+}
+
+.eb-pin-item:hover .eb-pin-pill {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+    border-color: var(--saffron);
+}
+
+.eb-pin-icon-dot {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+}
+
+.bg-sms { background: var(--ch-sms); }
+.bg-rcs { background: var(--ch-rcs); }
+.bg-wa { background: var(--ch-wa); }
+.bg-obd { background: var(--ch-obd); }
+.bg-ivr { background: var(--ch-ivr); }
+
+.eb-pin-meta {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.eb-pin-tag {
+    font-size: 11px;
+    font-weight: 700;
+    color: #64748B;
+    line-height: 1.1;
+}
+
+.eb-pin-val {
+    font-size: 13px;
+    font-weight: 800;
+    color: #0F172A;
+}
+
+/* Pin Positions matching EventBeds map */
+.pin-pos-1 { top: 12%; left: 8%; }
+.pin-pos-2 { top: 18%; right: 12%; }
+.pin-pos-3 { bottom: 25%; left: 10%; }
+.pin-pos-4 { bottom: 20%; right: 8%; }
+.pin-pos-5 { top: 48%; right: 2%; }
+
+/* Hero Backdrop Brand Art */
+.eb-hero-backdrop-layer {
+    position: relative;
+    margin-bottom: 24px;
+    z-index: 2;
+}
+
+.hero-center-logo {
+    max-width: 480px;
+    width: 100%;
+    filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.08));
+    transition: transform 0.4s ease;
+}
+
+.hero-center-logo:hover {
+    transform: scale(1.03);
+}
+
+/* Mega Typography */
+.eb-hero-typography {
+    position: relative;
+    z-index: 5;
+    max-width: 900px;
+    padding: 0 20px;
+}
+
+.eb-hero-subheader {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--saffron);
+    margin-bottom: 12px;
+}
+
+.eb-mega-title {
+    font-family: var(--font-heading);
+    font-size: clamp(40px, 7vw, 90px);
+    font-weight: 800;
+    color: #000000;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    margin-bottom: 24px;
+}
+
+.text-mask-span {
+    background: linear-gradient(135deg, var(--saffron) 0%, var(--green) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.eb-hero-tagline {
+    font-size: clamp(16px, 2vw, 19px);
+    color: var(--eb-grey-text);
+    max-width: 680px;
+    margin: 0 auto 36px;
+    line-height: 1.6;
+}
+
+.eb-hero-cta-group {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.eb-hero-down-gradient {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    background: linear-gradient(180deg, transparent, #FFFFFF);
+}
+
+/* ==========================================================================
+   2. EVENTBEDS 3-COLUMN DEALS SHOWCASE (Phone Frame)
+   ========================================================================== */
+.eb-deals-section {
+    padding: 80px 0 100px;
+    background: #FFFFFF;
+}
+
+.eb-head-block {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.eb-eyebrow {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--saffron);
+    margin-bottom: 10px;
+}
+
+.eb-heading-h1 {
+    font-family: var(--font-heading);
+    font-size: clamp(30px, 4.5vw, 52px);
+    font-weight: 800;
+    color: #000000;
+    line-height: 1.15;
+    letter-spacing: -0.03em;
+}
+
+.eb-heading-h1.white {
+    color: #FFFFFF;
+}
+
+.eb-phone-showcase-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr 1fr;
+    gap: 32px;
+    align-items: center;
+}
+
+.eb-side-column {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.eb-text-pin-card {
+    background: var(--eb-light-bg);
+    border: 1px solid var(--eb-light-border);
+    border-radius: var(--radius-card);
+    padding: 32px;
+}
+
+.card-title {
+    font-family: var(--font-heading);
+    font-size: 20px;
+    font-weight: 800;
+    margin-bottom: 10px;
+    color: #0F172A;
+}
+
+.card-sub {
+    font-size: 14px;
+    color: var(--eb-grey-text);
+    line-height: 1.6;
+}
+
+.stat-pill-badge {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #FFFFFF;
+    border: 1px solid var(--eb-light-border);
+    padding: 14px 20px;
+    border-radius: var(--radius-pill);
+    font-size: 14px;
+    font-weight: 700;
+    box-shadow: var(--shadow-pin);
+}
+
+.metric-big-number {
+    font-family: var(--font-heading);
+    font-size: 54px;
+    font-weight: 800;
+    color: var(--green);
+    line-height: 1;
+    margin-bottom: 8px;
+}
+
+/* Center Phone Frame */
+.eb-center-phone-area {
+    display: flex;
+    justify-content: center;
+}
+
+.eb-mobile-device-frame {
+    width: 100%;
+    max-width: 380px;
+    background: #0B0E14;
+    border-radius: var(--radius-phone);
+    padding: 24px;
+    border: 8px solid #1E293B;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.25);
+}
+
+.eb-screen-viewport {
+    background: #141A23;
+    border-radius: 20px;
+    padding: 20px;
+    min-height: 360px;
+}
+
+.eb-sim-screen-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 14px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    font-size: 12px;
+    color: #FFFFFF;
+    font-weight: 700;
+    margin-bottom: 16px;
+}
+
+.eb-sim-pill-status {
+    color: var(--green);
+    font-size: 11px;
+}
+
+.eb-sim-feed {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.feed-card {
+    background: #1E293B;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 14px;
+    color: #CBD5E1;
+    font-size: 13px;
+    opacity: 0.6;
+    transition: all 0.3s ease;
+}
+
+.feed-card.active {
+    opacity: 1;
+    border-color: var(--saffron);
+    background: rgba(255, 153, 51, 0.05);
+}
+
+.feed-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #FFFFFF;
+    margin-bottom: 6px;
+}
+
+.feed-header small {
+    color: var(--green);
+    margin-left: auto;
+    font-size: 11px;
+}
+
+/* ==========================================================================
+   3. EVENTBEDS 3-PHONE STATIC DISCOVERY (Preference, Save, Book)
+   ========================================================================== */
+.eb-discover-section {
+    padding: 100px 0;
+    background: var(--eb-dark-bg);
+}
+
+.eb-discover-header {
+    text-align: center;
+    margin-bottom: 64px;
+}
+
+.eb-discovery-cards-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    max-width: 1280px;
+    margin: 0 auto;
+}
+
+.eb-discovery-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.discovery-phone-mock {
+    width: 100%;
+    max-width: 320px;
+    background: var(--eb-dark-surface);
+    border: 1px solid var(--eb-dark-border);
+    border-radius: var(--radius-phone);
+    padding: 18px;
+    box-shadow: var(--shadow-dark-card);
+    margin-bottom: 28px;
+    transition: transform 0.4s ease;
+}
+
+.eb-discovery-card:hover .discovery-phone-mock {
+    transform: translateY(-8px);
+}
+
+.phone-screen-ui {
+    border-radius: 20px;
+    padding: 20px 16px;
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.bg-dark-1 { background: #0F172A; }
+.bg-dark-2 { background: #1E1B4B; }
+.bg-dark-3 { background: #064E3B; }
+
+.mock-ui-header {
+    font-size: 13px;
+    font-weight: 700;
+    color: #FFFFFF;
+    margin-bottom: 16px;
+}
+
+.mock-ui-items {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.mock-item {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    color: #CBD5E1;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.mock-item.active i {
+    color: var(--green);
+}
+
+.mock-ui-composer {
+    text-align: center;
+}
+
+.mock-composer-badge {
+    background: var(--saffron);
+    color: #000;
+    font-size: 10px;
+    font-weight: 800;
+    padding: 3px 10px;
+    border-radius: 12px;
+    display: inline-block;
+    margin-bottom: 12px;
+}
+
+.mock-composer-box {
+    background: rgba(255, 255, 255, 0.08);
+    padding: 14px;
+    border-radius: 10px;
+    color: #FFF;
+    font-size: 12px;
+    margin-bottom: 16px;
+}
+
+.mock-send-btn {
+    background: var(--green);
+    color: #FFF;
+    border: none;
+    border-radius: var(--radius-pill);
+    padding: 8px 18px;
+    font-weight: 700;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.mock-telemetry-stats {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.tele-stat {
+    background: rgba(255, 255, 255, 0.08);
+    padding: 14px 8px;
+    border-radius: 10px;
+    flex: 1;
+    text-align: center;
+}
+
+.tele-stat .val {
+    font-family: var(--font-heading);
+    font-size: 18px;
+    font-weight: 800;
+    color: #FFF;
+    display: block;
+}
+
+.tele-stat small {
+    font-size: 10px;
+    color: var(--eb-muted-text);
+}
+
+.discovery-step-title {
+    font-family: var(--font-heading);
+    font-size: 24px;
+    font-weight: 800;
+    color: #FFFFFF;
+    margin-bottom: 8px;
+}
+
+.discovery-step-desc {
+    font-size: 14px;
+    color: var(--eb-muted-text);
+    max-width: 280px;
+}
+
+/* ==========================================================================
+   4. EVENTBEDS HOTEL BUILDING SECTION (Connect & Relax)
+   ========================================================================== */
+.eb-hotel-section {
+    padding: 100px 0;
+    background: var(--eb-dark-surface);
+}
+
+.hotel-head {
+    max-width: 760px;
+    margin: 0 auto 56px;
+}
+
+.hotel-lead-text {
+    font-size: 16px;
+    color: var(--eb-muted-text);
+    margin-top: 12px;
+}
+
+.eb-hotel-features-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+}
+
+.eb-hotel-card {
+    background: var(--eb-dark-card);
+    border: 1px solid var(--eb-dark-border);
+    border-radius: var(--radius-card);
+    padding: 32px 24px;
+    text-align: left;
+    transition: transform 0.3s ease;
+}
+
+.eb-hotel-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--saffron);
+}
+
+.eb-hotel-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.eb-hotel-card h4 {
+    font-size: 18px;
+    font-weight: 800;
+    color: #FFFFFF;
+    margin-bottom: 10px;
+}
+
+.eb-hotel-card p {
+    font-size: 13px;
+    color: var(--eb-muted-text);
+    line-height: 1.6;
+}
+
+/* ==========================================================================
+   5. EVENTBEDS BENTO SECTION (Deals to make your eyes water)
+   ========================================================================== */
+.eb-benf-section {
+    padding: 100px 0;
+    background: #FFFFFF;
+}
+
+.eb-benf-row {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 40px;
+    align-items: center;
+    margin-bottom: 60px;
+}
+
+.eb-benf-row.reverse {
+    grid-template-columns: 1fr 1.2fr;
+}
+
+.eb-benf-visual-card {
+    border-radius: var(--radius-card);
+    padding: 44px;
+    background: var(--eb-light-bg);
+    border: 1px solid var(--eb-light-border);
+    box-shadow: var(--shadow-card);
+}
+
+.benf-badge {
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--saffron);
+    margin-bottom: 12px;
+}
+
+.eb-benf-visual-card h3 {
+    font-family: var(--font-heading);
+    font-size: 26px;
+    font-weight: 800;
+    margin-bottom: 14px;
+    color: #0F172A;
+}
+
+.eb-benf-visual-card p {
+    font-size: 15px;
+    color: var(--eb-grey-text);
+    margin-bottom: 24px;
+}
+
+.benf-pill-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.b-pill {
+    background: #FFFFFF;
+    border: 1px solid var(--eb-light-border);
+    padding: 8px 16px;
+    border-radius: var(--radius-pill);
+    font-size: 12px;
+    font-weight: 700;
+    color: #0F172A;
+}
+
+.b-pill i {
+    color: var(--green);
+}
+
+.eb-benf-text-card {
+    padding: 20px;
+}
+
+.eb-heading-h2 {
+    font-family: var(--font-heading);
+    font-size: clamp(26px, 3.5vw, 38px);
+    font-weight: 800;
+    color: #000000;
+    margin: 8px 0 16px;
+    line-height: 1.2;
+}
+
+.eb-body-m {
+    font-size: 16px;
+    color: var(--eb-grey-text);
+    line-height: 1.7;
+}
+
+.pricing-badge-number {
+    font-family: var(--font-heading);
+    font-size: 56px;
+    font-weight: 800;
+    color: var(--green);
+    line-height: 1;
+    margin-bottom: 8px;
+}
+
+.pricing-badge-number span {
+    font-size: 18px;
+    color: var(--eb-grey-text);
+}
+
+.brand-partner-strip {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.partner-tag {
+    background: #FFFFFF;
+    border: 1px solid #CBD5E1;
+    padding: 6px 14px;
+    border-radius: var(--radius-pill);
+    font-size: 12px;
+    font-weight: 700;
+    color: #334155;
+}
+
+/* ==========================================================================
+   6. EVENTBEDS FOUNDERS / ABOUT SECTION
+   ========================================================================== */
+.eb-founders-section {
+    padding: 80px 0;
+    background: #000000;
+    color: #FFFFFF;
+}
+
+.founders-inner-card {
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 60px 24px;
+}
+
+.we-are-pill {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 6px 18px;
+    border-radius: var(--radius-pill);
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--saffron);
+}
+
+.founders-mega-heading {
+    font-family: var(--font-heading);
+    font-size: clamp(30px, 4.5vw, 54px);
+    font-weight: 800;
+    margin: 28px 0;
+    line-height: 1.15;
+}
+
+.founders-statement-text {
+    max-width: 780px;
+    margin: 0 auto 36px;
+    font-size: 17px;
+    color: #94A3B8;
+    line-height: 1.8;
+}
+
+.story-lead {
+    margin-bottom: 16px;
+    color: #E2E8F0;
+}
+
+.founders-badges-row {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+
+.f-badge {
+    background: #111827;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 10px 20px;
+    border-radius: var(--radius-pill);
+    font-size: 13px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* ==========================================================================
+   7. EVENTBEDS CTA SECTION
+   ========================================================================== */
+.eb-cta-section {
+    padding: 100px 0;
+    background: var(--eb-light-bg);
+}
+
+.eb-cta-box {
+    background: #000000;
+    border-radius: var(--radius-card);
+    padding: 64px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+    align-items: center;
+    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.3);
+}
+
+.eb-cta-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.eb-form-field input,
+.eb-form-field select {
+    width: 100%;
+    background: #111827;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    padding: 14px 18px;
+    color: #FFFFFF;
+    font-family: var(--font-main);
+    font-size: 14px;
+    transition: border-color 0.2s ease;
+}
+
+.eb-form-field input:focus,
+.eb-form-field select:focus {
+    outline: none;
+    border-color: var(--saffron);
+}
+
+/* ==========================================================================
+   8. EVENTBEDS FOOTER
+   ========================================================================== */
+.eb-site-footer {
+    background: #0B0E14;
+    color: #94A3B8;
+    padding: 80px 0 30px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.footer-grid-top {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    gap: 40px;
+    padding-bottom: 56px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.footer-brand-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+.footer-logo-img {
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+}
+
+.footer-logo-name {
+    font-family: var(--font-heading);
+    font-size: 20px;
+    font-weight: 800;
+    color: #FFFFFF;
+}
+
+.footer-brand-motto {
+    font-size: 13px;
+    line-height: 1.7;
+    margin-bottom: 20px;
+    max-width: 320px;
+}
+
+.footer-social-strip {
+    display: flex;
+    gap: 10px;
+}
+
+.footer-social-strip a {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.06);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    color: #CBD5E1;
+    transition: all 0.2s ease;
+}
+
+.footer-social-strip a:hover {
+    background: var(--saffron);
+    color: #000000;
+}
+
+.footer-links-column h4 {
+    font-family: var(--font-heading);
+    font-size: 14px;
+    font-weight: 700;
+    color: #FFFFFF;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 18px;
+}
+
+.footer-links-column {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.footer-links-column a {
+    font-size: 13px;
+    color: #94A3B8;
+    transition: color 0.2s ease;
+}
+
+.footer-links-column a:hover {
+    color: var(--saffron);
+}
+
+.footer-bottom-row {
+    padding-top: 30px;
+}
+
+.footer-tricolor-line {
+    display: flex;
+    height: 3px;
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 24px;
+}
+
+.tri-saff { flex: 1; background: var(--saffron); }
+.tri-wht { flex: 1; background: #FFFFFF; }
+.tri-grn { flex: 1; background: var(--green); }
+
+.footer-copy-text {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    color: #64748B;
+}
+
+/* ==========================================================================
+   SCROLL TO TOP
+   ========================================================================== */
+.eb-scroll-top-btn {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--saffron);
+    color: #000000;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    box-shadow: 0 10px 25px rgba(255, 153, 51, 0.4);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(15px);
+    transition: all 0.3s ease;
+    z-index: 999;
+}
+
+.eb-scroll-top-btn.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* ==========================================================================
+   RESPONSIVE LAYOUTS
+   ========================================================================== */
+@media (max-width: 1024px) {
+    .eb-phone-showcase-grid { grid-template-columns: 1fr; gap: 40px; }
+    .eb-discovery-cards-row { grid-template-columns: 1fr; gap: 48px; }
+    .eb-hotel-features-grid { grid-template-columns: 1fr 1fr; }
+    .eb-benf-row, .eb-benf-row.reverse { grid-template-columns: 1fr; }
+    .eb-cta-box { grid-template-columns: 1fr; padding: 40px; }
+    .footer-grid-top { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 768px) {
+    .eb-nav-menu { display: none; }
+    .eb-menu-hamburger { display: block; }
+    
+    .eb-pins-overlay { display: none; }
+    .eb-hotel-features-grid { grid-template-columns: 1fr; }
+    .footer-grid-top { grid-template-columns: 1fr; }
+    .footer-copy-text { flex-direction: column; gap: 8px; text-align: center; }
+}
