@@ -1865,23 +1865,88 @@ img {
   .tools-badges-column {
     width: 100% !important;
     max-width: 480px !important;
-    display: grid !important;
-    grid-template-columns: repeat(2, 1fr) !important;
+    display: flex !important;
+    flex-direction: column !important;
     gap: 12px !important;
   }
   .tool-feature-row,
   .tool-feature-row.right-row {
-    justify-content: stretch !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: center !important;
     width: 100% !important;
   }
   .tool-card-box {
     width: 100% !important;
-    padding: 8px 12px !important;
-    gap: 10px !important;
+    max-width: 360px !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    text-align: left !important;
+    padding: 10px 18px 10px 12px !important;
+    gap: 14px !important;
+    border-radius: 9999px !important;
+    margin: 0 auto !important;
   }
   .tool-icon-circle {
-    width: 40px !important;
-    height: 40px !important;
+    width: 44px !important;
+    height: 44px !important;
+    min-width: 44px !important;
+    min-height: 44px !important;
+    flex-shrink: 0 !important;
+    border-radius: 50% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin: 0 !important;
+  }
+  .tool-3d-img {
+    width: 30px !important;
+    height: 30px !important;
+    object-fit: contain !important;
+    display: block !important;
+    margin: 0 auto !important;
+  }
+  .tool-text-info {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    text-align: left !important;
+    flex-grow: 1 !important;
+  }
+  .tool-title-text {
+    font-size: 15px !important;
+    line-height: 1.25 !important;
+  }
+  .tool-desc-text {
+    font-size: 12px !important;
+    line-height: 1.3 !important;
+  }
+  .connector-line {
+    display: none !important;
+  }
+}
+
+@media (max-width: 576px) {
+  .tools-badges-column {
+    width: 100% !important;
+    max-width: 100% !important;
+    gap: 10px !important;
+  }
+  .tool-card-box {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 9px 14px 9px 10px !important;
+    gap: 12px !important;
+  }
+  .tool-icon-circle {
+    width: 42px !important;
+    height: 42px !important;
+    min-width: 42px !important;
+    min-height: 42px !important;
   }
   .tool-3d-img {
     width: 28px !important;
@@ -1892,16 +1957,6 @@ img {
   }
   .tool-desc-text {
     font-size: 11.5px !important;
-  }
-  .connector-line {
-    display: none !important;
-  }
-}
-
-@media (max-width: 576px) {
-  .tools-badges-column {
-    grid-template-columns: 1fr !important;
-    gap: 10px !important;
   }
 }
 
@@ -2417,9 +2472,6 @@ img {
       <div class="tools-badges-column right-side">
         <!-- 1. Voice & OBD -->
         <div class="tool-feature-row right-row">
-          <div class="connector-line right-line line-1">
-            <span class="connector-dot purple-dot"></span>
-          </div>
           <div class="tool-card-box">
             <div class="tool-icon-circle purple-circle">
               <img src="images/icon-voice-3d.png" alt="Voice & OBD" class="tool-3d-img"/>
@@ -2429,13 +2481,13 @@ img {
               <div class="tool-desc-text">OBD &amp; Voice API</div>
             </div>
           </div>
+          <div class="connector-line right-line line-1">
+            <span class="connector-dot purple-dot"></span>
+          </div>
         </div>
 
         <!-- 2. IVR Solutions -->
         <div class="tool-feature-row right-row">
-          <div class="connector-line right-line line-2">
-            <span class="connector-dot orange-dot"></span>
-          </div>
           <div class="tool-card-box">
             <div class="tool-icon-circle orange-circle">
               <img src="images/icon-ivr-3d.png" alt="IVR Solutions" class="tool-3d-img"/>
@@ -2445,13 +2497,13 @@ img {
               <div class="tool-desc-text">Cloud IVR Solutions</div>
             </div>
           </div>
+          <div class="connector-line right-line line-2">
+            <span class="connector-dot orange-dot"></span>
+          </div>
         </div>
 
         <!-- 3. Analytics -->
         <div class="tool-feature-row right-row">
-          <div class="connector-line right-line line-3">
-            <span class="connector-dot cyan-dot"></span>
-          </div>
           <div class="tool-card-box">
             <div class="tool-icon-circle cyan-circle">
               <img src="images/icon-analytics-3d.png" alt="Analytics" class="tool-3d-img"/>
@@ -2460,6 +2512,9 @@ img {
               <div class="tool-title-text">Analytics</div>
               <div class="tool-desc-text">Omnichannel CPaaS Panel</div>
             </div>
+          </div>
+          <div class="connector-line right-line line-3">
+            <span class="connector-dot cyan-dot"></span>
           </div>
         </div>
       </div>
