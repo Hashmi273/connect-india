@@ -924,7 +924,7 @@
         "name": "Connect INDIA Media Technologies",
         "image": "https://connectindia.digital/images/connect-india-logo.png",
         "telephone": "+91-22-69854100",
-        "email": "sales@clickconnectmedia.in",
+        "email": "info@connectindia.digital",
         "address": {
           "@type": "PostalAddress",
           "streetAddress": "Om Heera Panna Mall, Oshiwara Police Station Rd, Mhada Colony, Andheri West",
@@ -1063,22 +1063,22 @@
           <div class="form-fields-grid">
             <div class="form-field-item">
               <label for="contactName" class="form-field-label">Full Name *</label>
-              <input type="text" id="contactName" class="clean-input" placeholder="e.g. Rahul Sharma" required />
+              <input type="text" id="contactName" name="name" class="clean-input" placeholder="e.g. Rahul Sharma" required />
             </div>
             <div class="form-field-item">
               <label for="contactEmail" class="form-field-label">Work Email *</label>
-              <input type="email" id="contactEmail" class="clean-input" placeholder="name@company.com" required />
+              <input type="email" id="contactEmail" name="email" class="clean-input" placeholder="name@company.com" required />
             </div>
           </div>
 
           <div class="form-fields-grid">
             <div class="form-field-item">
               <label for="contactPhone" class="form-field-label">Phone / WhatsApp *</label>
-              <input type="tel" id="contactPhone" class="clean-input" placeholder="+91 98765 43210" required />
+              <input type="tel" id="contactPhone" name="phone" class="clean-input" placeholder="+91 98765 43210" required />
             </div>
             <div class="form-field-item">
               <label for="contactCompany" class="form-field-label">Company Name *</label>
-              <input type="text" id="contactCompany" class="clean-input" placeholder="e.g. Acme FinTech Corp" required />
+              <input type="text" id="contactCompany" name="company" class="clean-input" placeholder="e.g. Acme FinTech Corp" required />
             </div>
           </div>
 
@@ -1116,7 +1116,7 @@
           <!-- Project Details -->
           <div class="form-field-item">
             <label for="contactMessage" class="form-field-label">Project Details or Requirements</label>
-            <textarea id="contactMessage" class="clean-textarea" rows="4" placeholder="Tell us about your use case (e.g. transactional OTP delivery, marketing campaigns, customer chatbots)..."></textarea>
+            <textarea id="contactMessage" name="message" class="clean-textarea" rows="4" placeholder="Tell us about your use case (e.g. transactional OTP delivery, marketing campaigns, customer chatbots)..."></textarea>
           </div>
 
           <!-- Signature Black Submit Button -->
@@ -1156,7 +1156,7 @@
             </div>
             <div class="info-details">
               <span class="info-label">Sales &amp; Enterprise RFPs</span>
-              <a href="mailto:sales@clickconnectmedia.in" class="info-val-link">sales@clickconnectmedia.in</a>
+              <a href="mailto:info@connectindia.digital" class="info-val-link">info@connectindia.digital</a>
               <span class="info-subtext">Enterprise Volume Pricing &amp; SLAs</span>
             </div>
           </div>
@@ -1419,19 +1419,48 @@
     const closeModalBtn = document.getElementById('closeModalButton');
 
     if (contactForm) {
-      contactForm.addEventListener('submit', function(e) {
+      contactForm.addEventListener('submit', async function(e) {
         e.preventDefault();
         const submitBtn = document.getElementById('submitFormBtn');
         const originalHtml = submitBtn.innerHTML;
-        submitBtn.innerHTML = '<span>Processing...</span>';
+        submitBtn.innerHTML = '<span>Sending Request...</span>';
         submitBtn.style.opacity = '0.7';
+        submitBtn.disabled = true;
 
-        setTimeout(() => {
+        const selectedServices = Array.from(contactForm.querySelectorAll('input[name="services"]:checked'))
+          .map(function(cb) { return cb.value; })
+          .join(', ');
+
+        const payload = {
+          name: (document.getElementById('contactName') ? document.getElementById('contactName').value.trim() : ''),
+          email: (document.getElementById('contactEmail') ? document.getElementById('contactEmail').value.trim() : ''),
+          phone: (document.getElementById('contactPhone') ? document.getElementById('contactPhone').value.trim() : ''),
+          company: (document.getElementById('contactCompany') ? document.getElementById('contactCompany').value.trim() : ''),
+          services: selectedServices || 'None selected',
+          message: (document.getElementById('contactMessage') ? document.getElementById('contactMessage').value.trim() : ''),
+          _subject: 'New Lead: Connect INDIA Contact Form Submission (' + (document.getElementById('contactName') ? document.getElementById('contactName').value.trim() : 'Lead') + ')',
+          _template: 'table',
+          _captcha: 'false'
+        };
+
+        try {
+          await fetch('https://formsubmit.co/ajax/wasim@immensesmartsolutions.in', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+            },
+            body: JSON.stringify(payload)
+          });
+        } catch (err) {
+          console.warn('Form submission network notification:', err);
+        } finally {
           submitBtn.innerHTML = originalHtml;
           submitBtn.style.opacity = '1';
+          submitBtn.disabled = false;
           successModal.classList.add('show');
           contactForm.reset();
-        }, 500);
+        }
       });
     }
 
