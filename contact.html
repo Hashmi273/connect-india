@@ -904,7 +904,9 @@
         padding: 24px 20px;
       }
     }
-  </style>
+  /* WCAG AA text contrast enhancement */
+.body-s.grey, .body-m.grey { color: #4b5563 !important; }
+</style>
 
   
 <script type="application/ld+json">
@@ -954,7 +956,7 @@
   <!-- Navbar (Exact Header Match with index.html) -->
   <div data-animation="default" class="navbar w-nav" data-easing2="ease-out-expo" data-easing="ease-out-expo" data-collapse="all" role="banner" data-duration="0">
     <div class="container-full nav-set" style="display: flex; align-items: center; justify-content: space-between;">
-      <a data-from-main="true" href="/" class="brand w-nav-brand" style="display: flex; align-items: center; text-decoration: none; padding: 0; margin: 0;">
+      <a data-from-main="true" href="/" class="brand w-nav-brand" aria-label="Connect INDIA Home" style="display: flex; align-items: center; text-decoration: none; padding: 0; margin: 0;">
         <img src="images/connect-india-logo.png" alt="Connect INDIA" style="height: 60px; max-height: 64px; width: auto; object-fit: contain; display: block;" />
       </a>
       
@@ -1060,22 +1062,22 @@
         <form id="contactMainForm">
           <div class="form-fields-grid">
             <div class="form-field-item">
-              <label class="form-field-label">Full Name *</label>
+              <label for="contactName" class="form-field-label">Full Name *</label>
               <input type="text" id="contactName" class="clean-input" placeholder="e.g. Rahul Sharma" required />
             </div>
             <div class="form-field-item">
-              <label class="form-field-label">Work Email *</label>
+              <label for="contactEmail" class="form-field-label">Work Email *</label>
               <input type="email" id="contactEmail" class="clean-input" placeholder="name@company.com" required />
             </div>
           </div>
 
           <div class="form-fields-grid">
             <div class="form-field-item">
-              <label class="form-field-label">Phone / WhatsApp *</label>
+              <label for="contactPhone" class="form-field-label">Phone / WhatsApp *</label>
               <input type="tel" id="contactPhone" class="clean-input" placeholder="+91 98765 43210" required />
             </div>
             <div class="form-field-item">
-              <label class="form-field-label">Company Name *</label>
+              <label for="contactCompany" class="form-field-label">Company Name *</label>
               <input type="text" id="contactCompany" class="clean-input" placeholder="e.g. Acme FinTech Corp" required />
             </div>
           </div>
@@ -1085,27 +1087,27 @@
             <label class="form-field-label">Services Required</label>
             <div class="services-choice-grid">
               <label class="service-pill-option service-pill-sms">
-                <input type="checkbox" name="services" value="Bulk SMS" checked />
+                <input type="checkbox" name="services" value="Bulk SMS" aria-label="Bulk SMS" checked />
                 <div class="pill-content">Bulk SMS</div>
               </label>
               <label class="service-pill-option service-pill-rcs">
-                <input type="checkbox" name="services" value="RCS Messaging" checked />
+                <input type="checkbox" name="services" value="RCS Messaging" aria-label="RCS Messaging" checked />
                 <div class="pill-content">RCS Messaging</div>
               </label>
               <label class="service-pill-option service-pill-wa">
-                <input type="checkbox" name="services" value="WhatsApp API" checked />
+                <input type="checkbox" name="services" value="WhatsApp API" aria-label="WhatsApp API" checked />
                 <div class="pill-content">WhatsApp API</div>
               </label>
               <label class="service-pill-option service-pill-voice">
-                <input type="checkbox" name="services" value="Voice & OBD" />
+                <input type="checkbox" name="services" value="Voice & OBD" aria-label="Voice & OBD" />
                 <div class="pill-content">Voice &amp; OBD</div>
               </label>
               <label class="service-pill-option service-pill-ivr">
-                <input type="checkbox" name="services" value="IVR Solutions" />
+                <input type="checkbox" name="services" value="IVR Solutions" aria-label="IVR Solutions" />
                 <div class="pill-content">IVR System</div>
               </label>
               <label class="service-pill-option service-pill-cpaas">
-                <input type="checkbox" name="services" value="Enterprise CPaaS" />
+                <input type="checkbox" name="services" value="Enterprise CPaaS" aria-label="Enterprise CPaaS" />
                 <div class="pill-content">CPaaS API</div>
               </label>
             </div>
@@ -1113,7 +1115,7 @@
 
           <!-- Project Details -->
           <div class="form-field-item">
-            <label class="form-field-label">Project Details or Requirements</label>
+            <label for="contactMessage" class="form-field-label">Project Details or Requirements</label>
             <textarea id="contactMessage" class="clean-textarea" rows="4" placeholder="Tell us about your use case (e.g. transactional OTP delivery, marketing campaigns, customer chatbots)..."></textarea>
           </div>
 
@@ -1327,14 +1329,14 @@
           <div class="container-1280 footer-s">
             <div class="footer-top-block">
               <div class="logo-footer">
-                <a data-from-main="true" href="/" class="footer-logo w-inline-block" style="display: inline-block; text-decoration: none; padding: 0; margin: 0;">
+                <a data-from-main="true" href="/" class="footer-logo w-inline-block" aria-label="Connect INDIA Home" style="display: inline-block; text-decoration: none; padding: 0; margin: 0;">
                   <img src="images/connect-india-logo.png" alt="Connect INDIA" style="height: 52px; max-height: 56px; width: auto; object-fit: contain; display: block; filter: brightness(0) invert(1);" />
                 </a>
                 <div class="div-block-39">
                   <div class="body-s grey">Connect <span style="color: #ea580c; font-weight: 800;">INDIA</span>™ — Enterprise Cloud Messaging Platform.</div>
                 </div>
                 <div class="social-icons-block">
-                  <a href="https://clickconnectmedia.in/" target="_blank" class="social-link w-inline-block">
+                  <a href="https://clickconnectmedia.in/" target="_blank" class="social-link w-inline-block" aria-label="Connect MEDIA Website">
                     <div class="footer-icon w-embed">
                       <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
                         <g clip-path="url(#clip0_2065_2516)">
