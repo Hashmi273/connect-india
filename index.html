@@ -73,13 +73,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": "Organization",
+      "@type": ["Organization", "LocalBusiness"],
       "@id": "https://connectindia.digital/#organization",
       "name": "Connect INDIA Media Technologies",
       "alternateName": "Connect INDIA™",
       "url": "https://connectindia.digital/",
       "logo": "https://connectindia.digital/images/connect-india-logo.png",
+      "image": "https://connectindia.digital/images/connect-india-logo.png",
       "description": "India's premier enterprise CPaaS & omnichannel communications platform providing Bulk SMS, WhatsApp Business API, RCS messaging, SMPP gateways, and Cloud IVR solutions.",
+      "telephone": "+91-22-69854100",
+      "email": "info@connectindia.digital",
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "Om Heera Panna Mall, Oshiwara Police Station Rd, Mhada Colony, Andheri West",
@@ -87,6 +90,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         "addressRegion": "Maharashtra",
         "postalCode": "400053",
         "addressCountry": "IN"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 19.1465,
+        "longitude": 72.8315
+      },
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+        "opens": "09:00",
+        "closes": "20:00"
       },
       "contactPoint": {
         "@type": "ContactPoint",
@@ -2269,39 +2283,6 @@ img {
 }
 </style>
 
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  "name": "Connect INDIA™",
-  "image": "https://connectindia.digital/images/connect-india-logo.png",
-  "telephone": "+91-1800-CONNECT",
-  "url": "https://connectindia.digital/",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "Om Heera Panna Mall, Oshiwara Police Station Rd, Mhada Colony, Andheri West",
-    "addressLocality": "Mumbai",
-    "addressRegion": "Maharashtra",
-    "postalCode": "400053",
-    "addressCountry": "IN"
-  },
-  "geo": {
-    "@type": "GeoCoordinates",
-    "latitude": 19.1465,
-    "longitude": 72.8315
-  },
-  "openingHoursSpecification": {
-    "@type": "OpeningHoursSpecification",
-    "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-    "opens": "09:30",
-    "closes": "18:30"
-  },
-  "sameAs": [
-    "https://www.linkedin.com/company/connectindia-cpaas/"
-  ]
-}
-</script>
 
 </head><body class="body"><div data-animation="default" class="navbar w-nav" data-easing2="ease-out-expo" navbar-element-min="" change-color="" data-easing="ease-out-expo" navbar-move="" data-collapse="all" data-w-id="78922cc8-3567-068b-e39e-bcfe878732c1" role="banner" data-duration="0" navbar-element=""><div class="container-full nav-set" style="display: flex; align-items: center; justify-content: space-between;"><a data-from-main="true" href="/" aria-current="page" class="brand w-nav-brand w--current" aria-label="Connect INDIA Home" style="display: flex; align-items: center; text-decoration: none; padding: 0; margin: 0;">
   <img src="images/connect-india-logo.png" alt="Connect INDIA" style="height: 60px; max-height: 64px; width: auto; object-fit: contain; display: block;" />
